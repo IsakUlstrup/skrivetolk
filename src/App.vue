@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <router-view class="router section f100"></router-view>
-    <Navigation class="section" />
+    <router-view class="router f100"></router-view>
+    <Navigation />
   </div>
 </template>
 
@@ -22,29 +22,31 @@ export default {
 }
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: linear-gradient(170deg, #e3ffe7 0%, #d9e7ff 100%) no-repeat center center fixed;
-  background-size: cover;
+  background: rgb(233, 251, 255);
 }
 #app {
   display: flex;
-  align-items: flex-start;
 }
 h3 {
   margin-bottom: 20px;
-}
-.section {
-  flex-grow: 1;
 }
 .router {
   padding: 5%;
   width: 90%;
 }
+
 /* global classes */
 .input {
   margin: 10px 0;
-  padding: 2%;
-  border: 1px solid #eee;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #999;
   box-sizing: content-box;
+  background: none;
+}
+.input:hover, input:focus {
+  border: 1px solid #666;
+  color: #666;
 }
 .fl {
   float: left;
@@ -63,6 +65,9 @@ h3 {
 }
 .fs0 {
   flex-shrink: 0;
+}
+.w100 {
+  width: 100%;
 }
 /* end global classes */
 </style>

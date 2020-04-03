@@ -6,14 +6,14 @@ import store from './store'
 // routes
 import MainPage from './components/routes/MainPage'
 import Interpeter from './components/routes/Interpeter'
-import ManageAutoCorrects from './components/routes/ManageAutoCorrects'
+import ManageAcs from './components/routes/ManageAcs'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: MainPage },
   { path: '/interpeter', component: Interpeter},
-  { path: '/manage', component: ManageAutoCorrects}
+  { path: '/manage', component: ManageAcs}
 ]
 
 var router = new VueRouter({

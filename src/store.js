@@ -7,10 +7,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    autoCorrectLists: [],
-    userPreferences: {
-      userName: 'User-' + uuidv4()
-    }
+    acLists: [],
+    userPreferences: {}
   },
   mutations: {
     initialiseStore(state) {
@@ -21,38 +19,49 @@ export default new Vuex.Store({
 				)
 			}
 		},
-    addList (state, listName) {
+    addList (state, listData) {
+      // console.log('in: ', listData)
       var list = {
-        id: uuidv4(),
-        name: listName,
-        author: this.state.userPreferences.userName,
-        enabled: true,
-        lastUpdate: moment().format(),
-        autoCorrects: []
+        id: listData.id || uuidv4(),
+        name: listData.name,
+        lastUpdate: listData.lastUpdate || moment().format(),
+        acs: listData.acs || []
       }
-      console.log('List add request: ', list)
-      this.state.autoCorrectLists.push(list)
-      // localStorage.setItem('autoCorrectLists', JSON.stringify(this.state.autoCorrectLists))
+      console.log('Adding list (data): ', list)
+
+      // check is list already exists
+      var listMatch = this.state.acLists.filter(l => {
+        return l.id === list.id
+      })
+      if (listMatch.length > 0) {
+        console.log('list exists, replace.', listMatch)
+      } else {
+        console.log('Adding list: ', list.id)
+        this.state.acLists.push(list)
+      }
     },
     removelist (state, list) {
-      var listIndex = this.state.autoCorrectLists.indexOf(list)
-      this.state.autoCorrectLists.splice(listIndex, 1)
-      // console.log('removing list: ', list)
-      // var remaininglists = this.state.autoCorrectLists.filter(l => {
-      //   return l.id != list.id
-      // })
-      // console.log(remaininglists)
+      var listIndex = this.state.acLists.indexOf(list)
+      this.state.acLists.splice(listIndex, 1)
     },
     addAc (state, data) {
-      var listMatch = this.state.autoCorrectLists.filter(l => {return l.id === data.listId})
+      var listMatch = this.state.acLists.filter(l => {return l.id === data.listId})
       if (listMatch.length > 0) {
         var ac = {
           id: uuidv4(),
           in: data.in,
           out: data.out
         }
-        listMatch[0].autoCorrects.push(ac)
+        listMatch[0].acs.push(ac)
       }
+    }
+  },
+  getters: {
+    userPreferences: state => {
+      return state.userPreferences
+    },
+    acLists: state => {
+      return state.acLists
     }
   }
 })
