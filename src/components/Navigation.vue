@@ -1,8 +1,8 @@
 <template>
   <section id="Navigation" class="fs0">
-    <label for="navToggle">Meny</label>
-    <input type="checkbox" id="navToggle">
     <nav>
+      <label for="navToggle">+</label>
+      <input type="checkbox" id="navToggle">
       <ul>
         <li><router-link to="/">Forside</router-link></li>
         <li><router-link to="/interpeter">Skrivetolk</router-link></li>
@@ -23,16 +23,15 @@ export default {
   display: none;
 }
 nav {
-  transition: width 0.3s;
-  width: 350px;
-  display: none;
-  padding-top: 100px;
   height: 100vh;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 nav ul {
+  transition: width 0.9s;
+  margin-top: 50px;
   list-style: none;
+  display: none;
 }
 nav a {
   display: block;
@@ -46,22 +45,16 @@ nav a:visited {
 nav a:hover {
   background: rgba(0, 0, 0, 0.03);
 }
-#navToggle:checked ~ nav {
+#navToggle:checked ~ ul {
   display: block;
 }
 label {
-  transition: 0.4s;
-  opacity: 50%;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  padding: 30px;
+  padding: 20px;
   font-size: 12pt;
   user-select: none;
-  background: white;
-  border-radius: 0 0 0 5px;
+  display: block;
 }
 label:hover {
-  opacity: 100%;
+  background: rgb(255, 105, 247);
 }
 </style>
