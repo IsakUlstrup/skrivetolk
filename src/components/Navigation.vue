@@ -7,6 +7,7 @@
         <li><router-link to="/">Forside</router-link></li>
         <li><router-link to="/interpeter">Skrivetolk</router-link></li>
         <li><router-link to="/manage">Rediger autokorrektur</router-link></li>
+        <li><router-link to="/debug">Debug</router-link></li>
       </ul>
     </nav>
   </section>
@@ -34,6 +35,7 @@ nav ul {
   display: none;
 }
 nav a {
+  color: #262626;
   display: block;
   text-decoration: none;
   padding: 20px 50px;
@@ -55,6 +57,6 @@ label {
   display: block;
 }
 label:hover {
-  background: rgb(255, 105, 247);
+  background: rgb(167, 167, 167);
 }
 </style>

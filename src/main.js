@@ -7,13 +7,15 @@ import store from './store'
 import MainPage from './components/routes/MainPage'
 import Interpeter from './components/routes/Interpeter'
 import ManageAcs from './components/routes/ManageAcs'
+import Debug from './components/routes/Debug'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: MainPage },
   { path: '/interpeter', component: Interpeter},
-  { path: '/manage', component: ManageAcs}
+  { path: '/manage', component: ManageAcs},
+  { path: '/debug', component: Debug}
 ]
 
 var router = new VueRouter({

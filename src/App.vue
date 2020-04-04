@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:style="style">
     <router-view class="router f100"></router-view>
     <Navigation />
   </div>
@@ -11,6 +11,14 @@ export default {
   name: 'App',
   components: {
     Navigation
+  },
+  computed: {
+    style () {
+      var color = this.$store.getters.userPreferences.background
+      return {
+        background: `rgb(${color.r}, ${color.g}, ${color.b})`
+      }
+    }
   }
 }
 </script>
@@ -22,10 +30,10 @@ export default {
 }
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: rgb(233, 251, 255);
 }
 #app {
   display: flex;
+  background: rgb(255, 255, 255);
 }
 h3 {
   margin-bottom: 20px;

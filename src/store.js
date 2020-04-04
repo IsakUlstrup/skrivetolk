@@ -8,7 +8,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     acLists: [],
-    userPreferences: {}
+    userPreferences: {
+      background: {},
+      text: {}
+    }
   },
   mutations: {
     initialiseStore(state) {
@@ -18,7 +21,8 @@ export default new Vuex.Store({
 					Object.assign(state, JSON.parse(localStorage.getItem('store')))
 				)
 			}
-		},
+    },
+    // AutoCorrect stuff
     addList (state, listData) {
       // console.log('in: ', listData)
       var list = {
@@ -54,6 +58,11 @@ export default new Vuex.Store({
         }
         listMatch[0].acs.push(ac)
       }
+    },
+    // user preferences
+    setBackground (state, data) {
+      console.log('new background color: ', data.r, data.g, data.b)
+      this.state.userPreferences.background = data
     }
   },
   getters: {
