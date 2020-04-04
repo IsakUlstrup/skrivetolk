@@ -15,16 +15,6 @@ export default {
   props: {
     color: Object
   }
-  // },
-  // data: () => {
-  //   return {
-  //     color: {
-  //       r: null,
-  //       g: null,
-  //       b: null
-  //     }
-  //   }
-  // }
 }
 </script>
 

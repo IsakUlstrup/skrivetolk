@@ -61,6 +61,11 @@ export default new Vuex.Store({
     },
     // user preferences
     setBackground (state, data) {
+      if (!data.r || !data.g || !data.b) {
+        console.log('Invalid background color: ', data)
+        return
+      }
+
       console.log('new background color: ', data.r, data.g, data.b)
       this.state.userPreferences.background = data
     }
