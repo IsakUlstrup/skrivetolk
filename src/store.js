@@ -57,6 +57,7 @@ export default new Vuex.Store({
           out: data.out
         }
         listMatch[0].acs.push(ac)
+        listMatch[0].lastUpdate = moment().format()
       }
     },
     // user preferences
