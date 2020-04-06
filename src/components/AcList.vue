@@ -1,22 +1,24 @@
 <template>
   <div id="AcList">
-    <strong>{{list.name}}</strong>
-    <ul>
-      <li>id: {{list.id}}</li>
-      <li>oppdatert: {{list.lastUpdate | formatDate}}</li>
-      <li>
-        Autokorrekturer: {{list.acs.length}}
-        <ul id="acs" v-if="list.acs.length > 0">
-          <!-- v-for="item in items" :key="item.message" -->
-          <li v-for="ac in list.acs" :key="ac.id">{{ac.in}} - {{ac.out}}</li>
-        </ul>
-      </li>
-      <AddAc v-bind:list="list" />
+    <div id="metaData">
+      <h3>{{list.name}}</h3>
+      <ul>
+        <li>id: {{list.id}}</li>
+        <li>oppdatert: {{list.lastUpdate | formatDate}}</li>
+        <li>Antall autokorrekturer: {{list.acs.length}} <a @click="toggleAcTable">(vis)</a> </li>
+      </ul>
+    </div>
+    <div id="actions">
       <h3>Handlinger</h3>
       <input class="rounded input" type="button" value="Exsporter" @click="exportList(list)">
       <input class="rounded input" type="button" value="Slett" @click="removeList(list)">
-    </ul>
-    <!-- {{list}} -->
+    </div>
+    <div id="acs" v-bind:class="{ invisible: !showAcTable }">
+        <AddAc v-bind:list="list" />
+        <ul id="acs" v-if="list.acs.length > 0">
+          <li v-for="ac in list.acs" :key="ac.id">{{ac.in}} - {{ac.out}}</li>
+        </ul>
+    </div>
   </div>
 </template>
 
@@ -35,7 +37,15 @@ export default {
   props: {
     list: Object
   },
+  data: () => {
+    return {
+      showAcTable: false
+    }
+  },
   methods: {
+    toggleAcTable () {
+      this.showAcTable = !this.showAcTable
+    },
     exportList (list) {
       var blob = new Blob([JSON.stringify(list)], {type: "application/json;charset=utf-8"})
       fileSaver.saveAs(blob, list.name + '.json')
@@ -52,12 +62,29 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style: none;
 }
-#acs {
-  margin: 10px;
+a:hover {
+  text-decoration: underline;
 }
+#AcList {
+  display: flex;
+  flex-wrap: wrap;
 
+  margin-bottom: 50px;
+}
+#AcList div {
+  padding: 20px 0;
+}
+#metaData {
+  flex: auto;
+}
+#actions {
+  flex: initial;
+}
+#acs {
+  flex: 100%;
+}
 </style>

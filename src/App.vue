@@ -44,6 +44,9 @@ h3 {
 }
 
 /* global classes */
+.invisible {
+  display: none;
+}
 .input {
   margin: 10px 0;
   margin-right: 10px;
