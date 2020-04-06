@@ -14,16 +14,18 @@
       <input class="rounded input" type="button" value="Slett" @click="removeList(list)">
     </div>
     <div id="acs" v-bind:class="{ invisible: !showAcTable }">
-        <AddAc v-bind:list="list" />
-        <ul id="acs" v-if="list.acs.length > 0">
+        <!-- <AddAc v-bind:acList="list" /> -->
+        <AcTable v-bind:acList="list" />
+        <!-- <ul id="acs" v-if="list.acs.length > 0">
           <li v-for="ac in list.acs" :key="ac.id">{{ac.in}} - {{ac.out}}</li>
-        </ul>
+        </ul> -->
     </div>
   </div>
 </template>
 
 <script>
-import AddAc from './AddAc'
+// import AddAc from './AddAc'
+import AcTable from './AcTable'
 import fileSaver from 'file-saver'
 import moment from 'moment'
 
@@ -32,7 +34,8 @@ moment.locale('no')
 export default {
   name: 'AcList',
   components: {
-    AddAc
+    // AddAc,
+    AcTable
   },
   props: {
     list: Object

@@ -78,7 +78,7 @@ h3 {
   flex-shrink: 0;
 }
 .w100 {
-  width: 100%;
+  width: calc(100% - 20px);
 }
 /* end global classes */
 </style>

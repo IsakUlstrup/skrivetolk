@@ -12,7 +12,7 @@
 export default {
   name: 'AddAutoCorrect',
   props:{
-    list: Object
+    acList: Object
   },
   data () {
     return {
@@ -28,7 +28,7 @@ export default {
       var ac = {
         in: this.formData.in,
         out: this.formData.out,
-        listId: this.list.id
+        listId: this.acList.id
       }
       if (this.formData.in !== '' && this.formData.out !== '') {
         // add ac to store
