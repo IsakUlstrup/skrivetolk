@@ -5,12 +5,12 @@
       <ul>
         <li>id: {{list.id}}</li>
         <li>oppdatert: {{list.lastUpdate | formatDate}}</li>
-        <li>Antall autokorrekturer: {{list.acs.length}} <a @click="toggleAcTable">(vis)</a> </li>
+        <li>Antall autokorrekturer: {{list.acs.length}} <a @click="toggleAcTable">(vis/skjul)</a> </li>
       </ul>
     </div>
     <div id="actions">
       <h3>Handlinger</h3>
-      <input class="rounded input" type="button" value="Exsporter" @click="exportList(list)">
+      <input class="rounded input" type="button" value="Eksporter" @click="exportList(list)">
       <input class="rounded input" type="button" value="Slett" @click="removeList(list)">
     </div>
     <div id="acs" v-bind:class="{ invisible: !showAcTable }">

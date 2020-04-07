@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     sort() {
-      console.log('sorting')
+      // console.log('sorting')
       this.acList.acs.sort(function(a, b) {
         var nameA = a.in.toUpperCase(); // ignore upper and lowercase
         var nameB = b.in.toUpperCase(); // ignore upper and lowercase
