@@ -88,7 +88,7 @@ export default {
 
 <style scoped>
 table, td, th {
-  border: 1px solid #aaa;
+  border: 1px solid;
 }
 table {
   width: 100%;

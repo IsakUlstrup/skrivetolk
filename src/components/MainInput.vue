@@ -1,6 +1,7 @@
 <template>
   <div id="MainInput">
-    <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea>
+    <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
+    <textarea v-model="inputData"></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
@@ -57,7 +58,7 @@ textarea{
   height: 80vh;
   padding: 3%;
   resize: none;
-  border: 1px solid #ddd;
+  border: 1px solid;
   border-radius: 3px;
   font-size: 18px;
   background: none;

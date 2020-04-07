@@ -8,10 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     acLists: [],
-    userPreferences: {
-      background: {},
-      text: {}
-    }
+    userPreferences: []
   },
   mutations: {
     initialiseStore(state) {
@@ -61,19 +58,52 @@ export default new Vuex.Store({
       }
     },
     // user preferences
-    setBackground (state, data) {
-      if (!data.r || !data.g || !data.b) {
-        console.log('Invalid background color: ', data)
+    setPreference (state, payload) {
+      console.log('set preference: ', payload.key, payload.value)
+      // check if key exists
+      var matchingKeys = state.userPreferences.filter( pref => {
+        return pref.key === payload.key
+      })
+
+      if (matchingKeys.length > 1) {
+        console.log('Too many key matches, something is probably wrong')
         return
       }
 
-      console.log('new background color: ', data.r, data.g, data.b)
-      this.state.userPreferences.background = data
+      if (matchingKeys.length === 1) {
+        matchingKeys[0].value = payload.value
+        return
+      }
+
+      if (matchingKeys.length === 0) {
+        // no matches, push new
+        state.userPreferences.push({
+          key: payload.key,
+          value: payload.value
+        })
+      }
     }
   },
   getters: {
-    userPreferences: state => {
-      return state.userPreferences
+    // return user preference by key
+    userPreference: (state) => (key) => {
+      if (state.userPreferences.length === 0) {
+        return null
+      }
+
+      var matchingKeys = state.userPreferences.filter( pref => {
+        return pref.key === key
+      })
+      return matchingKeys[0]
+    },
+    color: (state, getters) => (key) => {
+      var color = getters.userPreference(key)
+      if (!color) {
+        console.log('Key not found, returning default')
+        return '#000'
+      }
+
+      return color.value
     },
     acLists: state => {
       return state.acLists

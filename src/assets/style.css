@@ -1,0 +1,50 @@
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+/* end reset */
+
+/* global classes */
+.invisible {
+  display: none;
+}
+.input {
+  margin: 10px 0;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid;
+  box-sizing: content-box;
+  background: none;
+}
+.input:hover, input:focus {
+  border: 1px solid;
+}
+.fl {
+  float: left;
+}
+.rounded {
+  border-radius: 5px;
+}
+.shadow {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.fa {
+  flex: auto;
+}
+fi {
+  flex: initial;
+}
+.f100 {
+  flex: 100%;
+}
+.fg2 {
+  flex-grow: 2;
+}
+.fs0 {
+  flex-shrink: 0;
+}
+.w100 {
+  width: calc(100% - 20px);
+}
+/* end global classes */

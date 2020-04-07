@@ -2,7 +2,11 @@
   <div id="Debug">
     <h3>Debug</h3>
     <strong>Background color</strong>
-    <ColorPicker v-bind:color="backgroundColor" @newColor="setBackground" />
+    <ColorPicker v-bind:color="primaryColor" @newColor="setBackground" />
+
+    <!-- <strong>Text color</strong>
+    <ColorPicker id="hei" v-bind:color="textColor" @newColor="setTextColor" /> -->
+    <strong @click="resetLocalStorage">Nullstill localStorage</strong>
   </div>
 </template>
 
@@ -14,15 +18,32 @@ export default {
     ColorPicker
   },
   methods: {
+    resetLocalStorage () {
+      localStorage.setItem('store', JSON.stringify(''))
+    },
     setBackground (color) {
+      // console.log('colorpicker: ', color)
       // set background color
-      this.$store.commit('setBackground', color)
+      this.$store.commit({
+        type: 'setPreference',
+        key: 'primaryColor',
+        value: color
+      })
+    },
+    setTextColor (color) {
+      // set background color
+      // console.log(color)
+      this.$store.commit('setText', color)
+      // this.$store.commit('setBackground', color)
     }
   },
   computed: {
-    backgroundColor() {
-      return this.$store.getters.userPreferences.background
-    }
+    primaryColor() {
+      return this.$store.getters.color('primaryColor')
+    }//,
+    // textColor() {
+    //   return this.$store.getters.userPreferences.style.text
+    // }
   }
 }
 </script>

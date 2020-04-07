@@ -1,19 +1,22 @@
 <template>
-  <form id="ColorPicker" >
-    r: {{color.r}}<br>
-    <input v-model="color.r" @change="$emit('newColor', color)" type="range" min="0" max="255"><br>
-    g: {{color.g}}<br>
-    <input v-model="color.g" @change="$emit('newColor', color)" type="range" min="0" max="255"><br>
-    b: {{color.b}}<br>
-    <input v-model="color.b" @change="$emit('newColor', color)" type="range" min="0" max="255"><br>
-  </form>
+  <div>
+    <input type="color"
+           @change="$emit('newColor', inputColor)"
+           v-model="inputColor">
+    <label for="head">Test</label>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'ColorPicker',
   props: {
-    color: Object
+    color: String
+  },
+  data: () => {
+    return {
+      inputColor: null
+    }
   }
 }
 </script>

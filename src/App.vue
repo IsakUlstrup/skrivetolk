@@ -1,84 +1,44 @@
 <template>
-  <div id="app" v-bind:style="style">
-    <router-view class="router f100"></router-view>
+  <div id="app" v-bind:style="userStyle">
+    <router-view id="router" class="fa"></router-view>
     <Navigation />
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation'
+
 export default {
   name: 'App',
   components: {
     Navigation
   },
   computed: {
-    style () {
-      var color = this.$store.getters.userPreferences.background
+    userStyle () {
+      var primaryColor = this.$store.getters.color('primaryColor')
+
+      // console.log('app.vue primaryColor:', primaryColor)
       return {
-        background: `rgb(${color.r}, ${color.g}, ${color.b})`
+        background: primaryColor
       }
+      // var text = this.$store.getters.userPreferences.style.text
+      // return {
+      //   background: `rgb(${background.r}, ${background.g}, ${background.b})`,
+      //   // 'border-color': `rgb(${text.r}, ${text.g}, ${text.b})`,
+      //   color: `rgb(${text.r}, ${text.g}, ${text.b})`
+      // }
     }
   }
 }
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: Helvetica, Arial, sans-serif;
-}
+@import './assets/style.css';
+
 #app {
   display: flex;
-  background: rgb(255, 255, 255);
 }
-h3 {
-  margin-bottom: 20px;
-}
-.router {
+#router {
   padding: 5%;
-  width: 90%;
 }
-
-/* global classes */
-.invisible {
-  display: none;
-}
-.input {
-  margin: 10px 0;
-  margin-right: 10px;
-  padding: 10px;
-  border: 1px solid #999;
-  box-sizing: content-box;
-  background: none;
-}
-.input:hover, input:focus {
-  border: 1px solid #666;
-  color: #666;
-}
-.fl {
-  float: left;
-}
-.rounded {
-  border-radius: 5px;
-}
-.shadow {
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-}
-.f100 {
-  flex: 100%;
-}
-.fg2 {
-  flex-grow: 2;
-}
-.fs0 {
-  flex-shrink: 0;
-}
-.w100 {
-  width: calc(100% - 20px);
-}
-/* end global classes */
 </style>
