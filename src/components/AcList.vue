@@ -2,7 +2,7 @@
   <div id="AcList" class="rounded shadow">
     <div id="metaData">
       <h1>
-        <input type="checkbox" name="enableList">
+        <!-- <input type="checkbox" name="enableList"> -->
         {{list.name}}</h1>
       <ul>
         <!-- <li>Id: {{list.id}}</li> -->
@@ -12,18 +12,8 @@
         <li><a @click="removeList(list)">Slett</a></li>
       </ul>
     </div>
-    <!-- <div id="actions">
-      <h3>Handlinger</h3>
-      <input class="rounded input" type="button" value="Eksporter" @click="exportList(list)">
-      <input class="rounded input" type="button" value="Slett" @click="removeList(list)">
-    </div> -->
-    <!-- <div class="clearfix"></div> -->
     <div id="acs">
-        <!-- <AddAc v-bind:acList="list" /> -->
         <AcTable v-bind:acList="list" v-bind:limit="5" />
-        <!-- <ul id="acs" v-if="list.acs.length > 0">
-          <li v-for="ac in list.acs" :key="ac.id">{{ac.in}} - {{ac.out}}</li>
-        </ul> -->
     </div>
   </div>
 </template>
@@ -46,14 +36,9 @@ export default {
     list: Object
   },
   data: () => {
-    return {
-      showAcTable: false
-    }
+    return {}
   },
   methods: {
-    toggleAcTable () {
-      this.showAcTable = !this.showAcTable
-    },
     exportList (list) {
       var blob = new Blob([JSON.stringify(list)], {type: "application/json;charset=utf-8"})
       fileSaver.saveAs(blob, list.name + '.json')
@@ -74,6 +59,7 @@ export default {
 ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 30px;
 }
 ul li {

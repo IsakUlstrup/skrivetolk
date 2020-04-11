@@ -2,19 +2,24 @@
   <div id="AcTable">
     <div id="actions">
       <input v-model="filter" class="input rounded filter" type="text" placeholder="filter">
-      <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
+      <!-- <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
       <input v-model="newAcData.out" class="input rounded" type="text" placeholder="Ut">
-      <input class="input rounded" type="button" value="Legg til ny" @click="addAc">
+      <input class="input rounded" type="button" value="Legg til ny" @click="addAc"> -->
     </div>
     <table v-if="acList.acs.length > 0">
       <tr>
-        <th>id</th>
+        <!-- <th>id</th> -->
         <th @click="sort">Inn</th>
         <th>Ut</th>
         <th></th>
       </tr>
+      <tr>
+        <td><input v-model="newAcData.in" class="rounded" type="text" placeholder="Inn"></td>
+        <td><input v-model="newAcData.out" class="rounded" type="text" placeholder="Ut"></td>
+        <td><a @click="addAc">➕</a></td>
+      </tr>
       <tr v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
-        <td>{{ ac.id }}</td>
+        <!-- <td>{{ ac.id }}</td> -->
         <td><input class="field" type="text" name="ac.in" disabled :value="ac.in"></td>
         <td><input class="field" type="text" name="ac.out" disabled :value="ac.out"></td>
         <td>
@@ -24,7 +29,7 @@
       </tr>
     </table>
     <div v-if="filteredAcs.length - limit > 0">
-      {{ filteredAcs.length - limit }} flere autokorrekturer
+      {{ filteredAcs.length - limit }} flere
     </div>
   </div>
 </template>
@@ -119,15 +124,25 @@ tr:nth-child(odd) {
 tr:hover {
   background: #efefef;
 }
-tr:hover aside {
-  display: block;
+tr input {
+  width: 100%;
+  padding: 5px;
+  background: none;
+  border: none;
 }
-tr aside {
+tr input:hover {
+  border: 1px solid #999;
+}
+/* tr:hover aside {
+  display: block;
+} */
+/* tr aside {
   position: absolute;
   margin-left: -50px;
-}
-tr aside a {
+} */
+tr a {
   text-decoration: none;
+  cursor: pointer;
 }
 table {
   width: 100%;
@@ -140,6 +155,7 @@ td, th {
 #actions {
   display: flex;
   flex-wrap: wrap;
+  white-space: nowrap;
 }
 #actions input {
   flex: auto;

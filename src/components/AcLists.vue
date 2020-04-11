@@ -25,8 +25,9 @@ export default {
 #AcLists {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 #AcLists div {
-  flex: 1;
+  flex: auto;
 }
 </style>
