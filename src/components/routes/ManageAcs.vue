@@ -1,8 +1,10 @@
 <template>
   <div id="ManageAcs">
     <AcLists />
-    <AddAcList />
-    <ImportAcList />
+    <div id="actions">
+      <AddAcList />
+      <ImportAcList />
+    </div>
   </div>
 </template>
 
@@ -22,4 +24,10 @@ export default {
 </script>
 
 <style scoped>
+#actions {
+  display: flex;
+}
+#actions * {
+  flex: auto;
+}
 </style>

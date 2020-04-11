@@ -18,6 +18,7 @@
 
 <script>
 // import AcList from './AcList'
+// TODO: handle multiple files
 
   const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
 
@@ -96,14 +97,13 @@
 .dropbox {
     outline: 2px dashed grey; /* the dash box */
     padding: 10px 10px;
-    min-height: 200px; /* minimum height */
+    min-height: 50px; /* minimum height */
     position: relative;
     cursor: pointer;
   }
 
   .input-file {
     opacity: 0;
-    width: 100%;
     height: 200px;
     position: absolute;
     cursor: pointer;

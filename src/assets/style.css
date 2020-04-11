@@ -5,6 +5,10 @@
 }
 /* end reset */
 
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 /* global classes */
 .invisible {
   display: none;
@@ -17,9 +21,9 @@
   box-sizing: content-box;
   background: none;
 }
-.input:hover, input:focus {
+/* .input:hover, input:focus {
   border: 1px solid;
-}
+} */
 .fl {
   float: left;
 }
@@ -46,5 +50,8 @@ fi {
 }
 .w100 {
   width: calc(100% - 20px);
+}
+.clearfix {
+  clear: both;
 }
 /* end global classes */

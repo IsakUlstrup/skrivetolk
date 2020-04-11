@@ -1,21 +1,26 @@
 <template>
-  <div id="AcList">
+  <div id="AcList" class="rounded shadow">
     <div id="metaData">
-      <h3>{{list.name}}</h3>
+      <h1>
+        <input type="checkbox" name="enableList">
+        {{list.name}}</h1>
       <ul>
-        <li>id: {{list.id}}</li>
-        <li>oppdatert: {{list.lastUpdate | formatDate}}</li>
-        <li>Antall autokorrekturer: {{list.acs.length}} <a @click="toggleAcTable">(vis/skjul)</a> </li>
+        <!-- <li>Id: {{list.id}}</li> -->
+        <li>Endret: {{list.lastUpdate | formatDate}}</li>
+        <li>{{list.acs.length}} autokorrekturer</li>
+        <li><a @click="exportList(list)">Eksporter</a></li>
+        <li><a @click="removeList(list)">Slett</a></li>
       </ul>
     </div>
-    <div id="actions">
+    <!-- <div id="actions">
       <h3>Handlinger</h3>
       <input class="rounded input" type="button" value="Eksporter" @click="exportList(list)">
       <input class="rounded input" type="button" value="Slett" @click="removeList(list)">
-    </div>
-    <div id="acs" v-bind:class="{ invisible: !showAcTable }">
+    </div> -->
+    <!-- <div class="clearfix"></div> -->
+    <div id="acs">
         <!-- <AddAc v-bind:acList="list" /> -->
-        <AcTable v-bind:acList="list" />
+        <AcTable v-bind:acList="list" v-bind:limit="5" />
         <!-- <ul id="acs" v-if="list.acs.length > 0">
           <li v-for="ac in list.acs" :key="ac.id">{{ac.in}} - {{ac.out}}</li>
         </ul> -->
@@ -68,26 +73,28 @@ export default {
 <style scoped>
 ul {
   list-style: none;
+  display: flex;
+  margin-bottom: 30px;
+}
+ul li {
+  margin-right: 20px;
+}
+h1 {
+  margin-bottom: 50px;
+}
+a {
+  text-decoration: underline;
+  cursor: pointer;
 }
 a:hover {
   text-decoration: underline;
 }
+.clearfix {
+  margin: 20px;
+}
 #AcList {
-  display: flex;
-  flex-wrap: wrap;
-
-  margin-bottom: 50px;
-}
-#AcList div {
-  padding: 20px 0;
-}
-#metaData {
-  flex: auto;
-}
-#actions {
-  flex: initial;
-}
-#acs {
-  flex: 100%;
+  padding: 30px;
+  margin: 50px;
+  white-space: nowrap;
 }
 </style>
