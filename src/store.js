@@ -57,6 +57,26 @@ export default new Vuex.Store({
         listMatch[0].lastUpdate = moment().format()
       }
     },
+    deleteAc (state, data) {
+      var listMatch = state.acLists.filter(list => {
+        return list.id === data.listId
+      })
+
+      if (listMatch.length === 0) {
+        console.log(`No lists with id: ${data.listId} found.`)
+        return
+      }
+
+      if (listMatch.length > 1) {
+        console.log(`Too many lists found with id: ${data.listId}, something is probably wrong.`)
+        return
+      }
+
+      listMatch[0].acs = listMatch[0].acs.filter(ac => {
+        return ac.id !== data.acId
+      })
+      console.log(`ac with id: ${data.acId} removed.`)
+    },
     // user preferences
     setPreference (state, payload) {
       console.log('set preference: ', payload.key, payload.value)
@@ -100,7 +120,7 @@ export default new Vuex.Store({
       var color = getters.userPreference(key)
       if (!color) {
         console.log('Key not found, returning default')
-        return '#000'
+        return '#fff'
       }
 
       return color.value

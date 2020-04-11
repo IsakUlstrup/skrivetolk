@@ -1,30 +1,26 @@
 <template>
   <div id="AcTable">
     <div id="actions">
-      <input id="filter" v-model="filter" class="input rounded" type="text" placeholder="filter">
+      <input v-model="filter" class="input rounded filter" type="text" placeholder="filter">
       <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
       <input v-model="newAcData.out" class="input rounded" type="text" placeholder="Ut">
       <input class="input rounded" type="button" value="Legg til ny" @click="addAc">
     </div>
     <table v-if="acList.acs.length > 0">
       <tr>
-        <!-- <th>id</th> -->
+        <th>id</th>
         <th @click="sort">Inn</th>
         <th>Ut</th>
-        <!-- <th>Handlinger</th> -->
+        <th></th>
       </tr>
-      <tr v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" >
-        <!-- <td>{{ ac.id }}</td> -->
-        <td>{{ ac.in }}</td>
-        <td>{{ ac.out }}</td>
-        <aside class="invisible">
-          <a href="">✏️</a>
-          <a href="">🗑️</a>
-          </aside>
-        <!-- <td>
-          <input class="input rounded" type="button" value="Endre" @click="editAc(ac.id)">
-          <input class="input rounded" type="button" value="Slett">
-        </td> -->
+      <tr v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
+        <td>{{ ac.id }}</td>
+        <td><input class="field" type="text" name="ac.in" disabled :value="ac.in"></td>
+        <td><input class="field" type="text" name="ac.out" disabled :value="ac.out"></td>
+        <td>
+          <a @click="editAc(ac.id, $event)">✏️</a>
+          <a @click="deleteAc(acList.id, ac.id)">🗑️</a>
+        </td>
       </tr>
     </table>
     <div v-if="filteredAcs.length - limit > 0">
@@ -88,9 +84,13 @@ export default {
         this.newAcData.out = null
       }
     },
-    editAc(id) {
+    editAc(id, event) {
       // var element = this.acs[index]
-      console.log('changing ', id)
+      console.log('changing ', id, ' event: ', event)
+    },
+    deleteAc(listId, acId) {
+      console.log('Deleting: ', listId, ' - ', acId)
+      this.$store.commit('deleteAc', {listId, acId})
     }
   }
 }
@@ -99,6 +99,18 @@ export default {
 <style scoped>
 table, td, th {
   /* border: 1px solid; */
+  text-align: center;
+}
+table .field {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  background: none;
+  font-size: 14px;
+  border: 1px solid red;
+}
+table .field:disabled {
+  border: none;
   text-align: center;
 }
 tr:nth-child(odd) {
@@ -132,7 +144,7 @@ td, th {
 #actions input {
   flex: auto;
 }
-#actions #filter {
+#actions .filter {
   flex: 100%;
 }
 </style>
