@@ -12,7 +12,7 @@ import Debug from './components/routes/Debug'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: MainPage },
+  { path: '/home', component: MainPage },
   { path: '/interpeter', component: Interpeter},
   { path: '/manage', component: ManageAcs},
   { path: '/debug', component: Debug}

@@ -1,16 +1,11 @@
 <template>
-  <section id="Navigation" class="fs0">
-    <nav>
-      <label for="navToggle">+</label>
-      <input type="checkbox" id="navToggle">
-      <ul>
-        <li><router-link to="/">Forside</router-link></li>
-        <li><router-link to="/interpeter">Skrivetolk</router-link></li>
-        <li><router-link to="/manage">Rediger autokorrektur</router-link></li>
-        <li><router-link to="/debug">Debug</router-link></li>
-      </ul>
-    </nav>
-  </section>
+  <nav id="Navigation">
+    <ul>
+      <li><router-link to="/home">F</router-link></li>
+      <li><router-link to="/manage">R</router-link></li>
+      <li><router-link to="/debug">D</router-link></li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -20,43 +15,24 @@ export default {
 </script>
 
 <style scoped>
-#navToggle {
-  display: none;
-}
-nav {
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-nav ul {
-  transition: width 0.9s;
-  margin-top: 50px;
-  list-style: none;
-  display: none;
-}
-nav a {
-  color: #262626;
+a {
+  color: white;
+  width:auto;
+  height:auto;
+  padding: 20px;
   display: block;
   text-decoration: none;
-  padding: 20px 50px;
-  width: 100%;
+  border-bottom: 1px solid #222;
 }
-nav a:visited {
-  color: #262626;
+a:hover {
+  background: #131313;
 }
-nav a:hover {
-  background: rgba(0, 0, 0, 0.03);
+ul {
+  list-style: none;
+  width: 50px;
 }
-#navToggle:checked ~ ul {
-  display: block;
-}
-label {
-  padding: 20px;
-  font-size: 12pt;
-  user-select: none;
-  display: block;
-}
-label:hover {
-  background: rgb(167, 167, 167);
+li .router-link-active {
+  background: #222;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8) inset;
 }
 </style>

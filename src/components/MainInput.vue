@@ -58,7 +58,8 @@ textarea{
   height: 80vh;
   padding: 3%;
   resize: none;
-  border: 1px solid;
+  border: 1px solid #ddd;
+  outline: none;
   border-radius: 3px;
   font-size: 18px;
   background: none;

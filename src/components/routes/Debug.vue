@@ -6,7 +6,8 @@
 
     <!-- <strong>Text color</strong>
     <ColorPicker id="hei" v-bind:color="textColor" @newColor="setTextColor" /> -->
-    <strong @click="resetLocalStorage">Nullstill localStorage</strong>
+    <br>
+    <a @click="resetLocalStorage"><strong>Nullstill localStorage</strong></a>
   </div>
 </template>
 
@@ -48,6 +49,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#Debug {
+  width: 100%;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="AcList" class="rounded shadow">
+  <div id="AcList">
     <div id="metaData">
       <h1>
         <!-- <input type="checkbox" name="enableList"> -->
@@ -80,7 +80,6 @@ a:hover {
 }
 #AcList {
   padding: 30px;
-  margin: 50px;
   white-space: nowrap;
 }
 </style>

@@ -119,10 +119,10 @@ table .field:disabled {
   text-align: center;
 }
 tr:nth-child(odd) {
-  background: #f6f6f6;
+  background: #333;
 }
 tr:hover {
-  background: #efefef;
+  background: #272525;
 }
 tr input {
   width: 100%;
