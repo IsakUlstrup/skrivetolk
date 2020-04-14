@@ -32,7 +32,7 @@ ul {
   width: 50px;
 }
 li .router-link-active {
-  background: #222;
+  background: rgb(146, 29, 140);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.8) inset;
 }
 </style>
