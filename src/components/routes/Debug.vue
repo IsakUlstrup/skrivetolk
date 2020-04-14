@@ -1,11 +1,9 @@
 <template>
   <div id="Debug">
-    <h3>Debug</h3>
-    <strong>Background color</strong>
-    <ColorPicker v-bind:color="primaryColor" @newColor="setBackground" />
-
-    <!-- <strong>Text color</strong>
-    <ColorPicker id="hei" v-bind:color="textColor" @newColor="setTextColor" /> -->
+    <h1 class="header">Debug</h1>
+    <br>
+    <br>
+    <ColorPicker v-bind:color="primaryColor" @newColor="setBackground">Background color</ColorPicker>
     <br>
     <a @click="resetLocalStorage"><strong>Nullstill localStorage</strong></a>
   </div>

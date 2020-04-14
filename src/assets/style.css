@@ -5,11 +5,28 @@
 }
 /* end reset */
 
+/* Fonts */
+
+/* Diavlo by Jos Buivenga */
+/* https://www.exljbris.com/diavlo.html */
+@font-face {
+  font-family: Diavlo;
+  src: url('./Diavlo_BLACK.otf');
+}
+/* end fonts */
+
 body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+
 /* global classes */
+.header {
+  font-family: Diavlo, sans-serif;
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 48pt;
+}
 .invisible {
   display: none;
 }
