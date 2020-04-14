@@ -1,5 +1,6 @@
 <template>
   <div id="ManageAcs">
+    <h1 class="header">Rediger</h1>
     <AcLists />
     <div id="actions">
       <AddAcList />
@@ -24,10 +25,4 @@ export default {
 </script>
 
 <style scoped>
-#actions {
-  display: flex;
-}
-#actions * {
-  flex: auto;
-}
 </style>

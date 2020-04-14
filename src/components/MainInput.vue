@@ -1,7 +1,7 @@
 <template>
   <div id="MainInput">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
-    <textarea v-model="inputData"></textarea>
+    <textarea v-bind:style="userStyle" v-model="inputData" rows="30"></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
@@ -48,20 +48,28 @@ export default {
         })
       }
     }
+  },
+  computed: {
+    userStyle() {
+      return {
+        color: this.$store.getters.color('textColor'),
+        'font-size': this.$store.getters.userPreference('textSize').value
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
 textarea{
-  width: 94%;
-  height: 80vh;
-  padding: 3%;
+  display: block;
+  width: 90%;
+  height: 75vh;
+  padding: 5%;
   resize: none;
-  border: 1px solid #ddd;
+  border: none;
   outline: none;
   border-radius: 3px;
-  font-size: 18px;
   background: none;
 }
 #autocompleteResults {

@@ -5,7 +5,6 @@
       @change="$emit('newColor', inputColor)"
       v-model="inputColor"
     >
-    <br>
     <label for="head"><slot>Color</slot></label>
   </div>
 </template>

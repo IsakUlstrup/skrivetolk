@@ -31,7 +31,7 @@ export default {
   computed: {
     userStyle () {
       return {
-        background: this.$store.getters.color('primaryColor')
+        background: this.$store.getters.color('backgroundColor')
       }
     }
   }
@@ -58,11 +58,9 @@ export default {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
-#sidePanel {
-  flex: 0;
-}
 #router {
   overflow-y: scroll;
+  flex: 3;
   padding: 50px;
   border: 1px solid #111;
   border-top: none;
@@ -71,11 +69,11 @@ export default {
   background: #222;
 }
 #content {
-  flex: auto;
+  flex: 8;
   padding: 5%;
 }
 #sidePanel {
-  flex: 1;
+  flex: 2 0 20%;
   display: flex;
   background: #333;
   height: 100vh;

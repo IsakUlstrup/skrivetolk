@@ -65,9 +65,6 @@ ul {
 ul li {
   margin-right: 20px;
 }
-h1 {
-  margin-bottom: 50px;
-}
 a {
   text-decoration: underline;
   cursor: pointer;
@@ -75,11 +72,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
-.clearfix {
-  margin: 20px;
-}
 #AcList {
-  padding: 30px;
   white-space: nowrap;
 }
 </style>
