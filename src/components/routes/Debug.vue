@@ -1,6 +1,6 @@
 <template>
   <div id="Debug">
-    <h1 class="header">Innstillinger</h1>
+    <h1 class="h1">Innstillinger</h1>
     <ColorPicker class="setting" v-bind:color="backgroundColor" @newColor="setBackgroundColor">Background color</ColorPicker>
 
     <ColorPicker class="setting" v-bind:color="textColor" @newColor="setTextColor">Text color</ColorPicker>

@@ -20,7 +20,7 @@ body {
 }
 
 /* global classes */
-.header {
+.h1 {
   font-family: Diavlo, sans-serif;
   text-align: center;
   margin-bottom: 50px;
@@ -28,20 +28,6 @@ body {
 }
 .invisible {
   display: none;
-}
-.input {
-  margin: 10px 0;
-  margin-right: 10px;
-  padding: 10px;
-  border: 1px solid;
-  box-sizing: content-box;
-  background: none;
-}
-/* .input:hover, input:focus {
-  border: 1px solid;
-} */
-.fl {
-  float: left;
 }
 .rounded {
   border-radius: 5px;

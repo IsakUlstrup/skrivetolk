@@ -1,6 +1,6 @@
 <template>
   <div id="ManageAcs">
-    <h1 class="header">Rediger</h1>
+    <h1 class="h1">Rediger</h1>
     <AcLists />
     <div id="actions">
       <AddAcList />
