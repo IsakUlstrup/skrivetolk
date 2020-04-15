@@ -1,11 +1,11 @@
 <template>
   <div id="app" v-bind:style="userStyle">
-    <section id="sidePanel" v-if="showSidePanel">
+    <section id="sidePanel" v-if="sidePanel">
       <Navigation />
       <router-view id="router"></router-view>
     </section>
     <div>
-      <a id="toggleSidePanel" @click="showSidePanel = !showSidePanel">➜</a>
+      <a id="toggleSidePanel" @click="toggleSidePanel">➜</a>
     </div>
     <section id="content">
       <MainInput />
@@ -28,11 +28,25 @@ export default {
       showSidePanel: false
     }
   },
+  methods: {
+    toggleSidePanel() {
+      // this.showSidePanel = !sidePanel
+      console.log('show: ', !this.sidePanel)
+      this.$store.commit({
+        type: 'setPreference',
+        key: 'showSidePanel',
+        value: !this.sidePanel
+      })
+    }
+  },
   computed: {
     userStyle () {
       return {
         background: this.$store.getters.color('backgroundColor')
       }
+    },
+    sidePanel() {
+      return this.$store.getters.userPreference('showSidePanel').value
     }
   }
 }
@@ -73,6 +87,7 @@ export default {
   padding: 5%;
 }
 #sidePanel {
+  transition: all 0.4s;
   flex: 2 0 20%;
   display: flex;
   background: #333;

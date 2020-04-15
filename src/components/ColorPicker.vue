@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style scoped>
+label {
+  margin-left: 30px;
+}
 input{
     border-radius: 100%;
     height: 60px;
@@ -38,6 +41,7 @@ input{
 
 input::-webkit-color-swatch-wrapper {
     padding: 0;
+    border: none;
 }
 input::-webkit-color-swatch {
     border: none;

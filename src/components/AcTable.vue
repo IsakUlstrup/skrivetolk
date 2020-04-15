@@ -102,6 +102,9 @@ export default {
 </script>
 
 <style scoped>
+#AcTable table {
+  color: white;
+}
 table, td, th {
   /* border: 1px solid; */
   text-align: center;
@@ -119,20 +122,20 @@ table .field:disabled {
   text-align: center;
 }
 tr:nth-child(odd) {
-  background: #333;
+  border-bottom: 1px solid #333;
 }
-tr:hover {
+/* tr:hover {
   background: #272525;
-}
+} */
 tr input {
   width: 100%;
   padding: 5px;
   background: none;
   border: none;
 }
-tr input:hover {
+/* tr input:hover {
   border: 1px solid #999;
-}
+} */
 /* tr:hover aside {
   display: block;
 } */
