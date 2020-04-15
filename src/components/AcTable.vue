@@ -102,6 +102,9 @@ export default {
 </script>
 
 <style scoped>
+tr {
+  border-color: #444;
+}
 /* table {
   border: 1px solid red;
 } */

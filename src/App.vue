@@ -66,7 +66,7 @@ export default {
   position: absolute;
   opacity: 0.5;
 }
-#toggleSidePanel:hover {
+#toggleSidePanel:hover, #toggleSidePanel:active {
   color: white;
   opacity: 1;
 }

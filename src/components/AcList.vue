@@ -1,24 +1,26 @@
 <template>
   <div id="AcList" class="mv1">
     <div id="metaData">
-      <h3 class="h3">{{list.name}}</h3>
-      <ul class="f fw lsn nw">
-        <!-- <li>Id: {{list.id}}</li> -->
-        <li class="mr3">Endret: {{list.lastUpdate | formatDate}}</li>
-        <li class="mr3">{{list.acs.length}} autokorrekturer</li>
-        <li class="mr3"><a class="l" @click="exportList(list)">Eksporter</a></li>
-        <li class="mr3"><a class="l" @click="removeList(list)">Slett</a></li>
-      </ul>
-    </div>
-    <div id="acs" class="mv2">
-        <AcTable v-bind:acList="list" v-bind:limit="5" />
-    </div>
+        <h3 class="h3">{{list.name}}</h3>
+        <ul class="f fw lsn nw">
+          <!-- <li>Id: {{list.id}}</li> -->
+          <li class="mr3">Endret: {{list.lastUpdate | formatDate}}</li>
+          <li class="mr3">{{list.acs.length}} autokorrekturer</li>
+          <li class="mr3"><a class="l" @click="showTable = !showTable">vis/skjul ak-er</a></li>
+          <li class="mr3"><a class="l" @click="exportList(list)">Eksporter</a></li>
+          <li class="mr3"><a class="l" @click="removeList(list)">Slett</a></li>
+        </ul>
+      </div>
+      <div v-if="showTable" id="acs" class="mv2">
+          <AcTable v-bind:acList="list" v-bind:limit="5" />
+      </div>
   </div>
 </template>
 
 <script>
 // import AddAc from './AddAc'
 import AcTable from './AcTable'
+// import GradientBorderPanel from './GradientBorderPanel'
 import fileSaver from 'file-saver'
 import moment from 'moment'
 
@@ -28,13 +30,16 @@ export default {
   name: 'AcList',
   components: {
     // AddAc,
-    AcTable
+    AcTable,
+    // GradientBorderPanel
   },
   props: {
     list: Object
   },
   data: () => {
-    return {}
+    return {
+      showTable: false
+    }
   },
   methods: {
     exportList (list) {
