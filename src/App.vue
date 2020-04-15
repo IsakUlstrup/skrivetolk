@@ -1,11 +1,13 @@
 <template>
   <div id="app" v-bind:style="userStyle">
-    <section id="sidePanel" v-if="sidePanel">
-      <Navigation />
-      <router-view id="router">hei</router-view>
-    </section>
+    <transition name="slide">
+      <section id="sidePanel" v-if="sidePanel">
+        <Navigation />
+        <router-view id="router"></router-view>
+      </section>
+    </transition>
     <div>
-      <a id="toggleSidePanel" @click="toggleSidePanel">➜</a>
+      <a id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
     <section id="content">
       <MainInput />
@@ -58,6 +60,14 @@ export default {
 <style>
 @import './assets/style.css';
 
+.slide-leave-active,
+.slide-enter-active {
+  transition: 0.4s;
+}
+.slide-enter, .slide-leave-to {
+  transform: translate(-100%, 0);
+}
+
 #app {
   display: flex;
   height: 100vh;
@@ -91,7 +101,8 @@ export default {
 }
 #sidePanel {
   transition: all 0.4s;
-  flex: 2 0 20%;
+  flex: none;
+  width: 30%;
   display: flex;
   background: #333;
   height: 100vh;

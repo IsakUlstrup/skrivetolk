@@ -10,13 +10,12 @@ import Debug from './components/routes/Debug'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/home', component: MainPage },
+  { path: '/', component: MainPage },
   { path: '/interpeter', component: Interpeter},
   { path: '/manage', component: ManageAcs},
   { path: '/debug', component: Debug}
 ]
 
 export default new VueRouter({
-  routes,
-  mode: 'history'
+  routes
 })

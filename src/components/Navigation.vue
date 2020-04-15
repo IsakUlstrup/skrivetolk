@@ -1,7 +1,7 @@
 <template>
   <nav id="Navigation">
     <ul>
-      <li><router-link to="/home">⌂</router-link></li>
+      <li><router-link to="/">⌂</router-link></li>
       <li><router-link to="/manage">✎</router-link></li>
       <li><router-link to="/debug">⚙︎</router-link></li>
     </ul>
@@ -31,7 +31,7 @@ ul {
   list-style: none;
   width: 60px;
 }
-li .router-link-active {
+li .router-link-exact-active {
   background: #8A2387;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
