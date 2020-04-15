@@ -1,36 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
 import store from './store'
+import router from './router'
 
-// routes
-import MainPage from './components/routes/MainPage'
-import Interpeter from './components/routes/Interpeter'
-import ManageAcs from './components/routes/ManageAcs'
-import Debug from './components/routes/Debug'
-
-Vue.use(VueRouter)
-
-const routes = [
-  { path: '/home', component: MainPage },
-  { path: '/interpeter', component: Interpeter},
-  { path: '/manage', component: ManageAcs},
-  { path: '/debug', component: Debug}
-]
-
-var router = new VueRouter({
-  routes,
-  mode: 'history'
-})
-
+// save store to localStorage when something changes
 store.subscribe((mutation, state) => {
-	// Store the state object as a JSON string
   localStorage.setItem('store', JSON.stringify(state))
 })
 
 new Vue({
   router,
   store,
+  // init store from localStorage on app start
   beforeCreate() {
 		this.$store.commit('initialiseStore');
 	},
