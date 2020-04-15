@@ -53,7 +53,7 @@ export default {
     userStyle() {
       return {
         color: this.$store.getters.color('textColor'),
-        'font-size': this.$store.getters.userPreference('textSize').value
+        'font-size': this.$store.getters.userPreference('textSize')
       }
     }
   }

@@ -7,7 +7,7 @@
 
     <div class="setting">
       Text size <br>
-      {{textSize.value}}
+      {{textSize}}
       <input @input="setTextSize" type="range" name="textSize" min="8" max="72">
     </div>
 

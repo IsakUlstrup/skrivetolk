@@ -2,7 +2,7 @@
   <div id="app" v-bind:style="userStyle">
     <section id="sidePanel" v-if="sidePanel">
       <Navigation />
-      <router-view id="router"></router-view>
+      <router-view id="router">hei</router-view>
     </section>
     <div>
       <a id="toggleSidePanel" @click="toggleSidePanel">➜</a>
@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     toggleSidePanel() {
-      // this.showSidePanel = !sidePanel
       console.log('show: ', !this.sidePanel)
       this.$store.commit({
         type: 'setPreference',
@@ -46,7 +45,11 @@ export default {
       }
     },
     sidePanel() {
-      return this.$store.getters.userPreference('showSidePanel').value
+      var panelFlag = this.$store.getters.userPreference('showSidePanel')
+      if (!panelFlag) {
+        return false
+      }
+      return true
     }
   }
 }

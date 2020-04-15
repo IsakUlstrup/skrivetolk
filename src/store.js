@@ -108,22 +108,30 @@ export default new Vuex.Store({
     // return user preference by key
     userPreference: (state) => (key) => {
       if (state.userPreferences.length === 0) {
+        console.log('Empty preferences, return null')
         return null
       }
 
       var matchingKeys = state.userPreferences.filter( pref => {
         return pref.key === key
       })
-      return matchingKeys[0]
+
+      if (matchingKeys.length === 0) {
+        console.log(`Key ${key} not found, returning null`)
+        return null
+      }
+
+      console.log('store returning: ', matchingKeys[0].value)
+      return matchingKeys[0].value
     },
     color: (state, getters) => (key) => {
       var color = getters.userPreference(key)
       if (!color) {
-        console.log('Key not found, returning default')
+        console.log(`Key ${key} not found, returning default (#fff)`)
         return '#fff'
       }
 
-      return color.value
+      return color
     },
     acLists: state => {
       return state.acLists
