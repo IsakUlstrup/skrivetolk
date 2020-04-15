@@ -1,15 +1,13 @@
 <template>
-  <div id="app" v-bind:style="userStyle">
-    <transition name="slide">
-      <section id="sidePanel" v-if="sidePanel">
-        <Navigation />
-        <router-view id="router"></router-view>
-      </section>
-    </transition>
+  <div id="app" class="f" v-bind:style="userStyle">
+    <section id="sidePanel" class="f" v-if="sidePanel">
+      <Navigation />
+      <router-view id="router" class="p1 bbn btn"></router-view>
+    </section>
     <div>
-      <a id="toggleSidePanel" @click="toggleSidePanel">≡</a>
+      <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
-    <section id="content">
+    <section id="content" class="p1">
       <MainInput />
     </section>
   </div>
@@ -60,50 +58,32 @@ export default {
 <style>
 @import './assets/style.css';
 
-.slide-leave-active,
-.slide-enter-active {
-  transition: 0.4s;
-}
-.slide-enter, .slide-leave-to {
-  transform: translate(-100%, 0);
-}
-
 #app {
-  display: flex;
   height: 100vh;
 }
 #toggleSidePanel {
-  padding: 15px;
   display: block;
-  margin: 10px 0;
   position: absolute;
+  opacity: 0.5;
 }
 #toggleSidePanel:hover {
   color: white;
-  background: linear-gradient(#333, #111);
-  border-radius: 0 5px 5px 0;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
-  cursor: pointer;
+  opacity: 1;
 }
 #router {
   overflow-y: scroll;
   flex: 3;
-  padding: 50px;
   border: 1px solid #111;
-  border-top: none;
-  border-bottom: none;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
   background: #222;
 }
 #content {
   flex: 8;
-  padding: 5%;
 }
 #sidePanel {
-  transition: all 0.4s;
   flex: none;
   width: 30%;
-  display: flex;
+  min-width: 500px;
   background: #333;
   height: 100vh;
   color: white;

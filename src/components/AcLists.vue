@@ -22,12 +22,4 @@ export default {
 </script>
 
 <style scoped>
-#AcLists {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-#AcLists div {
-  flex: auto;
-}
 </style>

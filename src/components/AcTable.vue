@@ -1,34 +1,34 @@
 <template>
   <div id="AcTable">
     <div id="actions">
-      <input v-model="filter" class="input rounded filter" type="text" placeholder="filter">
+      <input v-model="filter" class="p3 w100 br3 b" type="text" placeholder="filter">
       <!-- <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
       <input v-model="newAcData.out" class="input rounded" type="text" placeholder="Ut">
       <input class="input rounded" type="button" value="Legg til ny" @click="addAc"> -->
     </div>
-    <table v-if="acList.acs.length > 0">
+    <table class="mv1 w100 ct" v-if="acList.acs.length > 0">
       <tr>
         <!-- <th>id</th> -->
         <th @click="sort">Inn</th>
         <th>Ut</th>
-        <th></th>
+        <th>Rediger</th>
       </tr>
-      <tr>
+      <!-- <tr>
         <td><input v-model="newAcData.in" class="rounded" type="text" placeholder="Inn"></td>
         <td><input v-model="newAcData.out" class="rounded" type="text" placeholder="Ut"></td>
         <td><a @click="addAc">➕</a></td>
-      </tr>
-      <tr v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
+      </tr> -->
+      <tr class="bb pv1" v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
         <!-- <td>{{ ac.id }}</td> -->
-        <td><input class="field" type="text" name="ac.in" disabled :value="ac.in"></td>
-        <td><input class="field" type="text" name="ac.out" disabled :value="ac.out"></td>
+        <td><input class="p3 ct i" type="text" name="ac.in" disabled :value="ac.in"></td>
+        <td><input class="p3 ct i" type="text" name="ac.out" disabled :value="ac.out"></td>
         <td>
-          <a @click="editAc(ac.id, $event)">✏️</a>
-          <a @click="deleteAc(acList.id, ac.id)">🗑️</a>
+          <a class="l tdn" @click="editAc(ac.id, $event)">✏️</a>
+          <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
         </td>
       </tr>
     </table>
-    <div v-if="filteredAcs.length - limit > 0">
+    <div class="mv3" v-if="filteredAcs.length - limit > 0">
       {{ filteredAcs.length - limit }} flere
     </div>
   </div>
@@ -102,11 +102,14 @@ export default {
 </script>
 
 <style scoped>
-#AcTable table {
+/* table {
+  border: 1px solid red;
+} */
+/* #AcTable table {
   color: white;
 }
 table, td, th {
-  /* border: 1px solid; */
+  border: 1px solid;
   text-align: center;
 }
 table .field {
@@ -123,16 +126,16 @@ table .field:disabled {
 }
 tr:nth-child(odd) {
   border-bottom: 1px solid #333;
-}
+} */
 /* tr:hover {
   background: #272525;
 } */
-tr input {
+/* tr input {
   width: 100%;
   padding: 5px;
   background: none;
   border: none;
-}
+} */
 /* tr input:hover {
   border: 1px solid #999;
 } */
@@ -143,7 +146,7 @@ tr input {
   position: absolute;
   margin-left: -50px;
 } */
-tr a {
+/* tr a {
   text-decoration: none;
   cursor: pointer;
 }
@@ -165,5 +168,5 @@ td, th {
 }
 #actions .filter {
   flex: 100%;
-}
+} */
 </style>

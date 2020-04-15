@@ -2,9 +2,9 @@
   <div id="AddAutoCorrect">
     <strong>Legg til</strong>
     <br>
-    <input class="rounded input" v-model="formData.in" type="text" placeholder="Inn" name="in" v-on:keyup.enter="add">
-    <input class="rounded input" v-model="formData.out" type="text" placeholder="Ut" name="out" v-on:keyup.enter="add">
-    <input class="rounded input" type="button" value="Legg Til" :disabled="this.formData.in === '' || this.formData.out === ''" @click="add">
+    <input class="i" v-model="formData.in" type="text" placeholder="Inn" name="in" v-on:keyup.enter="add">
+    <input class="i" v-model="formData.out" type="text" placeholder="Ut" name="out" v-on:keyup.enter="add">
+    <input class="i" type="button" value="Legg Til" :disabled="this.formData.in === '' || this.formData.out === ''" @click="add">
   </div>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
-  <div id="ImportAcList">
+  <div id="ImportAcList" class="mv2">
     <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-        <h3>Importer autokorrekturliste</h3>
+        <h3 class="h3 mv2">Importer liste</h3>
         <div class="dropbox">
           <input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
             accept="application/json" class="input-file">
-            <p v-if="isInitial">
+            <p class="pv1" v-if="isInitial">
               Trekk filer hit<br> eller klikk for å velge fil
             </p>
             <p v-if="isSaving">
@@ -95,8 +95,7 @@
 
 <style scoped>
 .dropbox {
-    outline: 2px dashed grey; /* the dash box */
-    padding: 10px 10px;
+    outline: 2px solid grey; /* the dash box */
     min-height: 50px; /* minimum height */
     position: relative;
     cursor: pointer;
@@ -110,12 +109,10 @@
   }
 
   .dropbox:hover {
-    background: lightblue; /* when mouse over to the drop zone, change color */
+    background: rgb(134, 134, 134); /* when mouse over to the drop zone, change color */
   }
 
   .dropbox p {
-    font-size: 1.2em;
     text-align: center;
-    padding: 50px 0;
   }
 </style>

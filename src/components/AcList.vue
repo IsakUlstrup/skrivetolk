@@ -1,18 +1,16 @@
 <template>
-  <div id="AcList">
+  <div id="AcList" class="mv1">
     <div id="metaData">
-      <h1>
-        <!-- <input type="checkbox" name="enableList"> -->
-        {{list.name}}</h1>
-      <ul>
+      <h3 class="h3">{{list.name}}</h3>
+      <ul class="f fw lsn nw">
         <!-- <li>Id: {{list.id}}</li> -->
-        <li>Endret: {{list.lastUpdate | formatDate}}</li>
-        <li>{{list.acs.length}} autokorrekturer</li>
-        <li><a @click="exportList(list)">Eksporter</a></li>
-        <li><a @click="removeList(list)">Slett</a></li>
+        <li class="mr3">Endret: {{list.lastUpdate | formatDate}}</li>
+        <li class="mr3">{{list.acs.length}} autokorrekturer</li>
+        <li class="mr3"><a class="l" @click="exportList(list)">Eksporter</a></li>
+        <li class="mr3"><a class="l" @click="removeList(list)">Slett</a></li>
       </ul>
     </div>
-    <div id="acs">
+    <div id="acs" class="mv2">
         <AcTable v-bind:acList="list" v-bind:limit="5" />
     </div>
   </div>
@@ -56,7 +54,9 @@ export default {
 </script>
 
 <style scoped>
-ul {
+/* ul li {
+} */
+/* ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -74,5 +74,5 @@ a:hover {
 }
 #AcList {
   white-space: nowrap;
-}
+} */
 </style>

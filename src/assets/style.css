@@ -2,30 +2,200 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+input {
+  background: none;
+  color: white;
+}
+table {
+  border-collapse: collapse;
 }
 /* end reset */
 
 /* Fonts */
-
 /* Diavlo by Jos Buivenga */
 /* https://www.exljbris.com/diavlo.html */
 @font-face {
   font-family: Diavlo;
   src: url('./Diavlo_BLACK.otf');
 }
-/* end fonts */
+
+
+/* Global variables */
+:root {
+  --spacing1: 50px;
+  --spacing2: 30px;
+  --spacing3: 10px;
+  --header1Font: Diavlo, sans-serif;
+}
 
 body {
   font-family: Helvetica, Arial, sans-serif;
+  background: #222;
 }
 
-/* global classes */
-.h1 {
-  font-family: Diavlo, sans-serif;
-  text-align: center;
-  margin-bottom: 50px;
-  font-size: 48pt;
+/* General padding */
+.p1 {
+  padding: var(--spacing1);
 }
+.p2 {
+  padding: var(--spacing2);
+}
+.p3 {
+  padding: var(--spacing3);
+}
+/* Vertical padding */
+.pv1 {
+  padding: var(--spacing1) 0;
+}
+.pv2 {
+  padding: var(--spacing2) 0;
+}
+.pv3 {
+  padding: var(--spacing3) 0;
+}
+/* Horizontal padding */
+.ph1 {
+  padding: 0 var(--spacing1);
+}
+.ph2 {
+  padding: 0 var(--spacing2);
+}
+.ph3 {
+  padding: 0 var(--spacing3);
+}
+/* General margin */
+.m1 {
+  margin: var(--spacing1);
+}
+.m2 {
+  margin: var(--spacing2);
+}
+.m3 {
+  margin: var(--spacing3);
+}
+/* Vertical margin */
+.mv1 {
+  margin: var(--spacing1) 0;
+}
+.mv2 {
+  margin: var(--spacing2) 0;
+}
+.mv3 {
+  margin: var(--spacing3) 0;
+}
+/* Horizontal margin */
+.mh1 {
+  margin: 0 var(--spacing1);
+}
+.mh2 {
+  margin: 0 var(--spacing2);
+}
+.mh3 {
+  margin: 0 var(--spacing3);
+}
+/* Right margin */
+.mr1 {
+  margin-right: var(--spacing1);
+}
+.mr2 {
+  margin-right: var(--spacing2);
+}
+.mr3 {
+  margin-right: var(--spacing3);
+}
+/* Headers */
+.h1 {
+  font-family: var(--header1Font);
+  text-align: center;
+  font-size: 48pt;
+  margin-bottom: var(--spacing1);
+}
+.h2 {
+  font-size: 36pt;
+  margin-bottom: var(--spacing2);
+}
+.h3 {
+  font-size: 22pt;
+  margin-bottom: var(--spacing3);
+}
+
+/* Flex */
+.f {
+  display: flex;
+}
+.fw {
+  flex-wrap: wrap;
+}
+
+/* List */
+.lsn {
+  list-style: none;
+}
+
+/* Text */
+.nw {
+  white-space: nowrap;
+}
+.ct {
+  text-align: center;
+}
+.lt {
+  text-align: left;
+}
+.rt {
+  text-align: right;
+}
+
+/* Link */
+.l {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.tdn {
+  text-decoration: none;
+}
+
+/* Border */
+.b {
+  border:1px solid white
+}
+.bb {
+  border-bottom: 1px solid white;
+}
+.bbn {
+  border-bottom: none;
+}
+.btn {
+  border-top: none;
+}
+.br1 {
+  border-radius: 10px;
+}
+.br2 {
+  border-radius: 5px;
+}
+.br3 {
+  border-radius: 3px;
+}
+
+/* Input */
+.i {
+  border: 1px solid white;
+}
+.i:disabled {
+  border: none;
+}
+
+
+
+
+
+
+
+
+
 .invisible {
   display: none;
 }
@@ -38,7 +208,7 @@ body {
 .fa {
   flex: auto;
 }
-fi {
+.fi {
   flex: initial;
 }
 .f100 {
@@ -51,9 +221,8 @@ fi {
   flex-shrink: 0;
 }
 .w100 {
-  width: calc(100% - 20px);
+  width: 100%;
 }
 .clearfix {
   clear: both;
 }
-/* end global classes */
