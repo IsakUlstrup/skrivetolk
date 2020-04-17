@@ -1,11 +1,11 @@
 <template>
   <div id="Debug">
-    <h1 class="h1">Innstillinger</h1>
-    <ColorPicker class="setting" v-bind:color="backgroundColor" @newColor="setBackgroundColor">Background color</ColorPicker>
+    <!-- <h1 class="h1">Innstillinger</h1> -->
+    <ColorPicker class="mv2" v-bind:color="backgroundColor" @newColor="setBackgroundColor">Background color</ColorPicker>
 
-    <ColorPicker class="setting" v-bind:color="textColor" @newColor="setTextColor">Text color</ColorPicker>
+    <ColorPicker class="mv2" v-bind:color="textColor" @newColor="setTextColor">Text color</ColorPicker>
 
-    <div class="setting">
+    <div class="mv2">
       Text size <br>
       {{textSize}}
       <input @input="setTextSize" type="range" name="textSize" min="8" max="72">
@@ -69,8 +69,5 @@ export default {
 <style scoped>
 #reset {
   margin-top: 200px;
-}
-.setting {
-  margin: 30px 0;
 }
 </style>

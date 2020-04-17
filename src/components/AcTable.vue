@@ -1,36 +1,40 @@
 <template>
   <div id="AcTable">
     <div id="actions">
-      <input v-model="filter" class="p3 w100 br3 b" type="text" placeholder="filter">
+      <input v-model="filter" class="p3 mb2 w100 br3 b" type="text" placeholder="filter">
       <!-- <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
       <input v-model="newAcData.out" class="input rounded" type="text" placeholder="Ut">
       <input class="input rounded" type="button" value="Legg til ny" @click="addAc"> -->
     </div>
-    <table class="mv1 w100 ct" v-if="acList.acs.length > 0">
-      <tr>
-        <!-- <th>id</th> -->
-        <th @click="sort">Inn</th>
-        <th>Ut</th>
-        <th>Rediger</th>
-      </tr>
+    <table class="w100 ct" v-if="acList.acs.length > 0">
+      <thead class="mb3">
+        <tr>
+          <!-- <th>id</th> -->
+          <th @click="sort">Inn</th>
+          <th>Ut</th>
+          <!-- <th>Rediger</th> -->
+        </tr>
+      </thead>
       <!-- <tr>
         <td><input v-model="newAcData.in" class="rounded" type="text" placeholder="Inn"></td>
         <td><input v-model="newAcData.out" class="rounded" type="text" placeholder="Ut"></td>
         <td><a @click="addAc">➕</a></td>
       </tr> -->
-      <tr class="bb pv1" v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
-        <!-- <td>{{ ac.id }}</td> -->
-        <td><input class="p3 ct i" type="text" name="ac.in" disabled :value="ac.in"></td>
-        <td><input class="p3 ct i" type="text" name="ac.out" disabled :value="ac.out"></td>
-        <td>
-          <a class="l tdn" @click="editAc(ac.id, $event)">✏️</a>
-          <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
-        </td>
-      </tr>
+      <tbody>
+        <tr class="bb" v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
+          <!-- <td>{{ ac.id }}</td> -->
+          <td><input class="p3 ct i" type="text" name="ac.in" disabled :value="ac.in"></td>
+          <td><input class="p3 ct i" type="text" name="ac.out" disabled :value="ac.out"></td>
+          <!-- <td>
+            <a class="l tdn" @click="editAc(ac.id, $event)">✏️</a>
+            <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
+          </td> -->
+        </tr>
+      </tbody>
     </table>
     <div class="mv3" v-if="filteredAcs.length - limit > 0">
-      {{ filteredAcs.length - limit }} flere
-    </div>
+        ({{ filteredAcs.length - limit }} flere)
+      </div>
   </div>
 </template>
 
@@ -102,9 +106,19 @@ export default {
 </script>
 
 <style scoped>
-tr {
-  border-color: #444;
+* {
+  color: #aaa;
+  border-color: #111;
 }
+tbody tr:hover {
+  background: #222;
+}
+tbody tr:last-child {
+  border-bottom: none;
+}
+/* #AcTable {
+  border: 1px solid red;
+} */
 /* table {
   border: 1px solid red;
 } */

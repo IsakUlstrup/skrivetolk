@@ -1,17 +1,25 @@
 <template>
-  <div id="AcList" class="mv1">
+  <div id="AcList" class="mb1 shadow">
+    <h3 class="h3">{{list.name}}</h3>
     <div id="metaData">
-        <h3 class="h3">{{list.name}}</h3>
         <ul class="f fw lsn nw">
           <!-- <li>Id: {{list.id}}</li> -->
-          <li class="mr3">Endret: {{list.lastUpdate | formatDate}}</li>
-          <li class="mr3">{{list.acs.length}} autokorrekturer</li>
-          <li class="mr3"><a class="l" @click="showTable = !showTable">vis/skjul ak-er</a></li>
-          <li class="mr3"><a class="l" @click="exportList(list)">Eksporter</a></li>
-          <li class="mr3"><a class="l" @click="removeList(list)">Slett</a></li>
+          <li><input class="mr3" type="checkbox" name="enableList"></li>
+          <li class="mr3">{{list.lastUpdate | formatDate}}</li>
+          <li class="mr3">{{list.acs.length}} ak</li>
+          <!-- <li class="mr3"><a class="l" @click="showTable = !showTable">vis/skjul ak-er</a></li> -->
+          <li>
+            <strong><a class="l tdn" @click="actionMenu = !actionMenu">⋯</a></strong>
+            <aside v-if="actionMenu">
+              <ul class="lsn b">
+                <li><a class="l p3 bb" @click="exportList(list)">Eksporter</a></li>
+                <li><a class="l p3" @click="removeList(list)">Slett</a></li>
+              </ul>
+            </aside>
+          </li>
         </ul>
       </div>
-      <div v-if="showTable" id="acs" class="mv2">
+      <div v-if="showTable" id="acs" class="mt2">
           <AcTable v-bind:acList="list" v-bind:limit="5" />
       </div>
   </div>
@@ -38,7 +46,8 @@ export default {
   },
   data: () => {
     return {
-      showTable: false
+      showTable: true,
+      actionMenu: false
     }
   },
   methods: {
@@ -52,13 +61,41 @@ export default {
   },
   filters: {
     formatDate: (date) => {
-      return moment(date).format('D MMMM YYYY HH:mm')
+      return moment(date).format('DD.MM.YY HH:mm')
     }
   }
 }
 </script>
 
 <style scoped>
+#AcList {
+  background: #282828;
+  border-radius: 5px;
+  padding: 20px;
+}
+#metaData {
+  font-weight: lighter;
+  color: #aaa;
+  font-size: 10pt;
+}
+.l:hover {
+  color: white;
+}
+li aside {
+  position: absolute;
+  color: #aaa;
+}
+li aside ul {
+  border-color: #111;
+  background: #333;
+}
+li aside ul a {
+  border-color: #111;
+}
+li aside ul a:hover {
+  background: #222;
+}
+
 /* ul li {
 } */
 /* ul {

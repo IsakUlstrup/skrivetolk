@@ -2,7 +2,7 @@
   <div id="app" class="f" v-bind:style="userStyle">
     <section id="sidePanel" class="f" v-if="sidePanel">
       <Navigation />
-      <router-view id="router" class="p1 fa bbn btn"></router-view>
+      <router-view id="router" class="p2 fa bbn btn"></router-view>
     </section>
     <div>
       <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>

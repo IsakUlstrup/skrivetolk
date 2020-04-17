@@ -105,6 +105,26 @@ body {
 .mr3 {
   margin-right: var(--spacing3);
 }
+/* Bottom margin */
+.mb1 {
+  margin-bottom: var(--spacing1);
+}
+.mb2 {
+  margin-bottom: var(--spacing2);
+}
+.mb3 {
+  margin-bottom: var(--spacing3);
+}
+/* Top margin */
+.mt1 {
+  margin-top: var(--spacing1);
+}
+.mt2 {
+  margin-top: var(--spacing2);
+}
+.mt3 {
+  margin-top: var(--spacing3);
+}
 /* Headers */
 .h1 {
   font-family: var(--header1Font);
@@ -113,10 +133,12 @@ body {
   margin-bottom: var(--spacing1);
 }
 .h2 {
+  font-family: var(--header1Font);
   font-size: 36pt;
   margin-bottom: var(--spacing2);
 }
 .h3 {
+  font-family: var(--header1Font);
   font-size: 22pt;
   margin-bottom: var(--spacing3);
 }
@@ -152,6 +174,8 @@ body {
 .l {
   text-decoration: underline;
   cursor: pointer;
+  display: block;
+  user-select: none;
 }
 .tdn {
   text-decoration: none;
