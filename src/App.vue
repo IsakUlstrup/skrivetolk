@@ -2,12 +2,12 @@
   <div id="app" class="f" v-bind:style="userStyle">
     <section id="sidePanel" class="f" v-if="sidePanel">
       <Navigation />
-      <router-view id="router" class="p1 bbn btn"></router-view>
+      <router-view id="router" class="p1 fa bbn btn"></router-view>
     </section>
     <div>
       <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
-    <section id="content" class="p1">
+    <section id="content" class="p1 fa">
       <MainInput />
     </section>
   </div>
@@ -72,13 +72,9 @@ export default {
 }
 #router {
   overflow-y: scroll;
-  flex: 3;
   border: 1px solid #111;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
   background: #222;
-}
-#content {
-  flex: 8;
 }
 #sidePanel {
   flex: none;
