@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:style="userStyle">
+  <div id="app" class="f" v-bind:style="userStyle">
     <section class="sidePanel f" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
@@ -25,7 +25,6 @@ export default {
   },
   data: () => {
     return {
-      showSidePanel: false
     }
   },
   methods: {
@@ -59,7 +58,6 @@ export default {
 
 #app {
   height: 100vh;
-  display: flex;
 }
 #toggleSidePanel {
   display: block;
