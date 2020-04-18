@@ -7,7 +7,7 @@
     <div>
       <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
-    <section id="content" class="p1">
+    <section id="content" class="p1 fa">
       <MainInput />
     </section>
   </div>
@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     toggleSidePanel() {
-      console.log('show: ', !this.sidePanel)
       this.$store.commit({
         type: 'setPreference',
         key: 'showSidePanel',
@@ -77,25 +76,15 @@ export default {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
   background: #222;
 }
-#content {
-  flex: 2;
-}
-section {
-  transition: all 0.2s;
-}
 .sidePanel {
-  flex: 1 0 20%;
+  transition: flex 0.2s;
+  flex: 1 0 400px;
   max-width: 500px;
-  min-width: 400px;
-  overflow:auto;
-  /* width: 30%; */
-  /* min-width: 500px; */
+  overflow: hidden;
   background: #333;
-  /* height: 100vh; */
   color: white;
 }
 .hidePanel {
   flex: 0;
-  min-width: 0;
 }
 </style>

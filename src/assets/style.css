@@ -153,6 +153,15 @@ body {
 .f0 {
   flex: 0;
 }
+.fa {
+  flex: auto;
+}
+.fi {
+  flex: initial;
+}
+.f100 {
+  flex: 100%;
+}
 
 /* List */
 .lsn {
@@ -234,15 +243,6 @@ body {
 }
 .shadowInset {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7) inset;
-}
-.fa {
-  flex: auto;
-}
-.fi {
-  flex: initial;
-}
-.f100 {
-  flex: 100%;
 }
 .fg2 {
   flex-grow: 2;

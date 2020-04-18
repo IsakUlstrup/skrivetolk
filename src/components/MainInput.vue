@@ -72,7 +72,6 @@ textarea{
   resize: none;
   border: none;
   outline: none;
-  border-radius: 3px;
   background: none;
 }
 #autocompleteResults {
