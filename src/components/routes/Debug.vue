@@ -1,18 +1,19 @@
 <template>
   <div id="Debug">
     <!-- <h1 class="h1">Innstillinger</h1> -->
-    <ColorPicker class="mv2" v-bind:color="backgroundColor" @newColor="setBackgroundColor">Background color</ColorPicker>
+    <ColorPicker class="mv2" v-bind:color="backgroundColor" @newColor="setBackgroundColor">Bakgrunnsfarge</ColorPicker>
 
-    <ColorPicker class="mv2" v-bind:color="textColor" @newColor="setTextColor">Text color</ColorPicker>
+    <ColorPicker class="mv2" v-bind:color="textColor" @newColor="setTextColor">Tekstfarge</ColorPicker>
 
     <div class="mv2">
-      Text size <br>
-      {{textSize}}
-      <input @input="setTextSize" type="range" name="textSize" min="8" max="72">
+      Tekststørrelse: {{textSize}}
+      <br>
+      <br>
+      <input @input="setTextSize" type="range" name="textSize" min="8" max="100">
     </div>
 
     <div id="reset">
-      <a id="reset" @click="resetLocalStorage"><strong>Nullstill localStorage</strong></a>
+      <a id="reset" class="l" @click="resetLocalStorage"><strong>Nullstill localStorage</strong></a>
     </div>
   </div>
 </template>
