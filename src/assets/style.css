@@ -150,6 +150,9 @@ body {
 .fw {
   flex-wrap: wrap;
 }
+.f0 {
+  flex: 0;
+}
 
 /* List */
 .lsn {

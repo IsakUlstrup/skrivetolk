@@ -1,13 +1,13 @@
 <template>
-  <div id="app" class="f" v-bind:style="userStyle">
-    <section id="sidePanel" class="f" v-if="sidePanel">
+  <div id="app" v-bind:style="userStyle">
+    <section class="sidePanel f" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
     </section>
     <div>
       <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
-    <section id="content" class="p1 fa">
+    <section id="content" class="p1">
       <MainInput />
     </section>
   </div>
@@ -60,6 +60,7 @@ export default {
 
 #app {
   height: 100vh;
+  display: flex;
 }
 #toggleSidePanel {
   display: block;
@@ -76,12 +77,25 @@ export default {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
   background: #222;
 }
-#sidePanel {
-  flex: none;
-  width: 30%;
-  min-width: 500px;
+#content {
+  flex: 2;
+}
+section {
+  transition: all 0.2s;
+}
+.sidePanel {
+  flex: 1 0 20%;
+  max-width: 500px;
+  min-width: 400px;
+  overflow:auto;
+  /* width: 30%; */
+  /* min-width: 500px; */
   background: #333;
-  height: 100vh;
+  /* height: 100vh; */
   color: white;
+}
+.hidePanel {
+  flex: 0;
+  min-width: 0;
 }
 </style>
