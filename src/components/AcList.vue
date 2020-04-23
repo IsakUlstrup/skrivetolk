@@ -20,7 +20,7 @@
         </ul>
       </div>
       <div v-if="showTable" id="acs" class="mt2">
-          <AcTable v-bind:acList="list" v-bind:limit="5" />
+          <AcTable v-bind:acList="list" v-bind:limit="30" />
       </div>
   </div>
 </template>
@@ -29,6 +29,7 @@
 // import AddAc from './AddAc'
 import AcTable from './AcTable'
 // import GradientBorderPanel from './GradientBorderPanel'
+// import AcTable2 from './AcTable2'
 import fileSaver from 'file-saver'
 import moment from 'moment'
 
@@ -38,7 +39,8 @@ export default {
   name: 'AcList',
   components: {
     // AddAc,
-    AcTable,
+    AcTable
+    // AcTable2
     // GradientBorderPanel
   },
   props: {

@@ -1,44 +1,31 @@
 <template>
   <div id="AcTable">
     <div id="actions">
-      <div class="f mb3">
-        <input v-model="newAcData.in" class="p3 b br3 w100 mr3" type="text" placeholder="Inn">
-        <input v-model="newAcData.out" class="p3 b br3 w100 mr3" type="text" placeholder="Ut">
-        <input type="button" class="p3 b br3 w100" value="Legg til ny" @click="addAc">
-      </div>
-
       <input v-model="filter" class="p3 mb2 w100 br3 b" type="text" placeholder="filter">
+      <!-- <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
+      <input v-model="newAcData.out" class="input rounded" type="text" placeholder="Ut">
+      <input class="input rounded" type="button" value="Legg til ny" @click="addAc"> -->
     </div>
-    <table class="w100 ct b" v-if="acList.acs.length > 0">
-      <thead class="mb3">
-        <tr>
-          <!-- <th>id</th> -->
-          <th @click="sort">Inn</th>
-          <th>Ut</th>
-          <th>Rediger</th>
-        </tr>
-      </thead>
-      <!-- <tr>
-        <td><input v-model="newAcData.in" class="rounded" type="text" placeholder="Inn"></td>
-        <td><input v-model="newAcData.out" class="rounded" type="text" placeholder="Ut"></td>
-        <td><a @click="addAc">➕</a></td>
-      </tr> -->
-      <tbody>
-        <tr class="" v-for="ac in filteredAcs.slice(0, limit)" :key="ac.id" @dblclick="editAc(ac.id, $event)">
-          <!-- <td>{{ ac.id }}</td> -->
-          <td><input class="p3 ct i" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in"></td>
-          <td><input class="p3 ct i" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out"></td>
-          <td class="f">
-            <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
-            <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
 
-            <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <ul
+    class="lsn"
+    v-if="acList.acs.length > 0"
+    >
+      <li
+      class="f"
+      v-for="ac in filteredAcs.slice(0, limit)"
+      :key="ac.id"
+      >
+        <input class="p3 ct i" type="text" name="ac.in" ref="in" disabled :value="ac.in">
+        <input class="p3 ct i" type="text" name="ac.out" ref="out" disabled :value="ac.out">
+        <div class="">
+          <a class="l tdn" @click="editAc(ac.id, $event)">✏️</a>
+          <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
+        </div>
+      </li>
+    </ul>
     <div class="mv3" v-if="filteredAcs.length - limit > 0">
-        ({{ filteredAcs.length - limit }} flere, begrenset pga. ytelse)
+        ({{ filteredAcs.length - limit }} flere)
       </div>
   </div>
 </template>
@@ -46,6 +33,8 @@
 <script>
 export default {
   name: 'AcTable',
+  components: {
+  },
   props: {
     acList: Object,
     limit: Number
@@ -98,29 +87,9 @@ export default {
         this.newAcData.out = null
       }
     },
-    editAc(obj) {
-      // disable edit mode for other objects
-      this.acList.acs.forEach(ac => {
-        if (ac.id !== obj.id) {
-          ac.editMode = false
-        }
-      })
-
-      if (!obj.editMode) {
-        // enable edit mode
-        this.$set(obj, 'editMode', true);
-      } else {
-        this.$set(obj, 'editMode', undefined)
-        // save, disable dit mode
-        // console.log(obj, this.acList.id)
-        var data = {
-          listId: this.acList.id,
-          id: obj.id,
-          in: obj.in,
-          out: obj.out
-        }
-        this.$store.commit('updateAc', data)
-      }
+    editAc(id, event) {
+      // var element = this.acs[index]
+      console.log('changing ', id, ' event: ', event)
     },
     deleteAc(listId, acId) {
       console.log('Deleting: ', listId, ' - ', acId)
@@ -140,9 +109,6 @@ tbody tr:hover {
 }
 tbody tr:last-child {
   border-bottom: none;
-}
-input:disabled {
-  border: 1px solid #282828;
 }
 /* #AcTable {
   border: 1px solid red;

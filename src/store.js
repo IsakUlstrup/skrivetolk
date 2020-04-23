@@ -57,6 +57,32 @@ export default new Vuex.Store({
         listMatch[0].lastUpdate = moment().format()
       }
     },
+    updateAc (state, data) {
+      console.log('Store: updating ac: ', data)
+
+      // find list
+      var listMatch = state.acLists.filter(list => {
+        return list.id === data.listId
+      })
+      // error handlig
+      if (listMatch.length === 0) {
+        console.log(`No lists with id: ${data.listId} found.`)
+        return
+      }
+
+      if (listMatch.length > 1) {
+        console.log(`Too many lists found with id: ${data.listId}, something is probably wrong.`)
+        return
+      }
+
+      listMatch[0].lastUpdate = moment().format()
+
+      // var acMatch = listMatch[0].acs.filter(ac => {
+      //   return ac.id === data.id
+      // })
+
+      // console.log('Store: ac match: ', acMatch)
+    },
     deleteAc (state, data) {
       var listMatch = state.acLists.filter(list => {
         return list.id === data.listId
@@ -121,7 +147,7 @@ export default new Vuex.Store({
         return null
       }
 
-      console.log('store returning: ', matchingKeys[0].value)
+      // console.log('store returning: ', matchingKeys[0].value)
       return matchingKeys[0].value
     },
     color: (state, getters) => (key) => {
