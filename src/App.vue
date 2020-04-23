@@ -77,11 +77,11 @@ export default {
   border-bottom: none;
 }
 #content {
-  transition: margin 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 .sidePanel {
   /* box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8); */
-  transition: left 0.15s;
+  transition: left 0.2s;
   /* flex: 1 0 400px; */
   min-width: 400px;
   position: absolute;

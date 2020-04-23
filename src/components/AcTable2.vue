@@ -10,22 +10,29 @@
       <input v-model="filter" class="p3 mb2 w100 br3 b" type="text" placeholder="filter">
     </div> -->
 
-    <ul class="list w100 lsn" v-if="acList.acs.length > 0">
-      <li
-      class="f br2 mh3"
-      v-for="ac in filteredAcs.slice(0, limit)"
-      :key="ac.id"
-      >
-        <input class="p3 ct i fa" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
-        <input class="p3 ct i fa" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
-        <div class="edit f p3">
-          <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
-          <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
+    <!-- <ul > -->
+      <transition-group
+      class="list w100 lsn"
+      v-if="acList.acs.length > 0"
+      name="list"
+      tag="ul">
+        <li
+        class="f br2 m3"
+        v-for="ac in filteredAcs.slice(0, limit)"
+        :key="ac.id"
+        >
+          <input class="p3 i fa ct" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
+          <input class="p3 i fa ct" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
+          <div class="edit f fa p3">
+            <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
+            <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
 
-          <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
-        </div>
-      </li>
-    </ul>
+            <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
+          </div>
+        </li>
+        </transition-group>
+    <!-- </ul> -->
+
     <div class="mv3" v-if="filteredAcs.length - limit > 0">
         ({{ filteredAcs.length - limit }} flere)
       </div>
@@ -120,13 +127,22 @@ export default {
 </script>
 
 <style scoped>
+.list-enter-active, .list-leave-active {
+  transition: all .4s ease-out;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+
 ul li {
   transition: all 0.4s ease-out;
 }
 ul li:hover {
   background: #222;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  transform: scale(1.005);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  transform: scale(1.04);
 }
 input:disabled {
   border: 1px solid #282828;
@@ -137,12 +153,6 @@ input:disabled {
 }
 .i:disabled {
   border: none;
-}
-.f {
-  flex-wrap: wrap;
-}
-.showEdit {
-  flex: 100%;
 }
 /* #AcTable {
   border: 1px solid red;
