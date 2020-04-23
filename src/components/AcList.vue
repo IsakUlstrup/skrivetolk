@@ -4,7 +4,7 @@
     <div id="metaData">
         <ul class="f fw lsn nw">
           <!-- <li>Id: {{list.id}}</li> -->
-          <li><input class="mr3" type="checkbox" name="enableList"></li>
+          <!-- <li><input class="mr3" type="checkbox" name="enableList"></li> -->
           <li class="mr3">{{list.lastUpdate | formatDate}}</li>
           <li class="mr3">{{list.acs.length}} ak</li>
           <!-- <li class="mr3"><a class="l" @click="showTable = !showTable">vis/skjul ak-er</a></li> -->

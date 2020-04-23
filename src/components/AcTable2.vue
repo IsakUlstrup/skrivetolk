@@ -12,13 +12,13 @@
 
     <ul class="list w100 lsn" v-if="acList.acs.length > 0">
       <li
-      class="f br2"
+      class="f br2 mh3"
       v-for="ac in filteredAcs.slice(0, limit)"
       :key="ac.id"
       >
         <input class="p3 ct i fa" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
         <input class="p3 ct i fa" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
-        <div class="edit f">
+        <div class="edit f p3">
           <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
           <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
 
@@ -125,7 +125,8 @@ ul li {
 }
 ul li:hover {
   background: #222;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  transform: scale(1.005);
 }
 input:disabled {
   border: 1px solid #282828;
@@ -134,16 +135,14 @@ input:disabled {
   max-height: 300px;
   overflow-y: scroll;
 }
-.edit {
-  flex: 0;
-  overflow: hidden;
-  box-shadow: 0px 0px 4px #111 inset;
-}
 .i:disabled {
   border: none;
 }
 .f {
   flex-wrap: wrap;
+}
+.showEdit {
+  flex: 100%;
 }
 /* #AcTable {
   border: 1px solid red;

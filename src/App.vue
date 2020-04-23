@@ -71,7 +71,7 @@ export default {
 #router {
   overflow-y: scroll;
   border: 1px solid #111;
-  /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset; */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
   background: #222;
   border-top: none;
   border-bottom: none;
@@ -80,7 +80,7 @@ export default {
   transition: margin 0.2s ease-out;
 }
 .sidePanel {
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8);
+  /* box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8); */
   transition: left 0.2s;
   /* flex: 1 0 400px; */
   min-width: 400px;
