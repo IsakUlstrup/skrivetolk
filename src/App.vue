@@ -81,7 +81,7 @@ export default {
 }
 .sidePanel {
   /* box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8); */
-  transition: left 0.2s;
+  transition: left 0.15s;
   /* flex: 1 0 400px; */
   min-width: 400px;
   position: absolute;
