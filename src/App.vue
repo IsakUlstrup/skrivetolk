@@ -1,13 +1,13 @@
 <template>
-  <div id="app" class="f" v-bind:style="userStyle">
+  <div id="app" v-bind:style="userStyle">
     <section class="sidePanel f" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
+      <div>
+        <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
+      </div>
     </section>
-    <div>
-      <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
-    </div>
-    <section id="content" class="p1 fa">
+    <section id="content" class="p1" v-bind:class="{ moveRight: sidePanel }">
       <MainInput />
     </section>
   </div>
@@ -71,18 +71,32 @@ export default {
 #router {
   overflow-y: scroll;
   border: 1px solid #111;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
+  /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset; */
   background: #222;
+  border-top: none;
+  border-bottom: none;
+}
+#content {
+  transition: margin 0.2s ease-out;
 }
 .sidePanel {
-  transition: flex 0.2s;
-  flex: 1 0 400px;
-  max-width: 500px;
-  overflow: hidden;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8);
+  transition: left 0.2s;
+  /* flex: 1 0 400px; */
+  min-width: 400px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 30%;
   background: #333;
   color: white;
 }
 .hidePanel {
-  flex: 0;
+  left: -30%;
+  min-width: 0;
+}
+.moveRight {
+  margin-left: 30%;
 }
 </style>
