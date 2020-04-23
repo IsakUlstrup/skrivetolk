@@ -32,7 +32,7 @@ table {
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: #222;
+  background-color: #111;
 }
 
 /* General padding */
@@ -219,6 +219,7 @@ body {
 /* Input */
 .i {
   border: 1px solid white;
+  overflow: hidden;
 }
 .i:disabled {
   border: none;

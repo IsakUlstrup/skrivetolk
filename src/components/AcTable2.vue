@@ -1,25 +1,27 @@
 <template>
-  <div id="AcTable">
-    <div id="actions">
-      <input v-model="filter" class="p3 mb2 w100 br3 b" type="text" placeholder="filter">
-      <!-- <input v-model="newAcData.in" class="input rounded" type="text" placeholder="Inn">
-      <input v-model="newAcData.out" class="input rounded" type="text" placeholder="Ut">
-      <input class="input rounded" type="button" value="Legg til ny" @click="addAc"> -->
-    </div>
+  <div class="AcTable2">
+    <!-- <div class="actions">
+      <div class="f mb3">
+        <input v-model="newAcData.in" class="p3 b br3 w100 mr3" type="text" placeholder="Inn">
+        <input v-model="newAcData.out" class="p3 b br3 w100 mr3" type="text" placeholder="Ut">
+        <input type="button" class="p3 b br3 w100" value="Legg til ny" @click="addAc">
+      </div>
 
-    <ul
-    class="lsn"
-    v-if="acList.acs.length > 0"
-    >
+      <input v-model="filter" class="p3 mb2 w100 br3 b" type="text" placeholder="filter">
+    </div> -->
+
+    <ul class="list w100 lsn" v-if="acList.acs.length > 0">
       <li
-      class="f"
+      class="f br2"
       v-for="ac in filteredAcs.slice(0, limit)"
       :key="ac.id"
       >
-        <input class="p3 ct i" type="text" name="ac.in" ref="in" disabled :value="ac.in">
-        <input class="p3 ct i" type="text" name="ac.out" ref="out" disabled :value="ac.out">
-        <div class="">
-          <a class="l tdn" @click="editAc(ac.id, $event)">✏️</a>
+        <input class="p3 ct i fa" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
+        <input class="p3 ct i fa" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
+        <div class="edit f">
+          <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
+          <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
+
           <a class="l tdn" @click="deleteAc(acList.id, ac.id)">🗑️</a>
         </div>
       </li>
@@ -32,9 +34,7 @@
 
 <script>
 export default {
-  name: 'AcTable',
-  components: {
-  },
+  name: 'AcTable2',
   props: {
     acList: Object,
     limit: Number
@@ -87,9 +87,29 @@ export default {
         this.newAcData.out = null
       }
     },
-    editAc(id, event) {
-      // var element = this.acs[index]
-      console.log('changing ', id, ' event: ', event)
+    editAc(obj) {
+      // disable edit mode for other objects
+      this.acList.acs.forEach(ac => {
+        if (ac.id !== obj.id) {
+          ac.editMode = false
+        }
+      })
+
+      if (!obj.editMode) {
+        // enable edit mode
+        this.$set(obj, 'editMode', true);
+      } else {
+        this.$set(obj, 'editMode', undefined)
+        // save, disable dit mode
+        // console.log(obj, this.acList.id)
+        var data = {
+          listId: this.acList.id,
+          id: obj.id,
+          in: obj.in,
+          out: obj.out
+        }
+        this.$store.commit('updateAc', data)
+      }
     },
     deleteAc(listId, acId) {
       console.log('Deleting: ', listId, ' - ', acId)
@@ -100,15 +120,30 @@ export default {
 </script>
 
 <style scoped>
-* {
-  color: #aaa;
-  border-color: #111;
+ul li {
+  transition: all 0.4s ease-out;
 }
-tbody tr:hover {
+ul li:hover {
   background: #222;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
 }
-tbody tr:last-child {
-  border-bottom: none;
+input:disabled {
+  border: 1px solid #282828;
+}
+.list {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.edit {
+  flex: 0;
+  overflow: hidden;
+  box-shadow: 0px 0px 4px #111 inset;
+}
+.i:disabled {
+  border: none;
+}
+.f {
+  flex-wrap: wrap;
 }
 /* #AcTable {
   border: 1px solid red;

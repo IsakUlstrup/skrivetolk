@@ -38,7 +38,7 @@
       </tbody>
     </table>
     <div class="mv3" v-if="filteredAcs.length - limit > 0">
-        ({{ filteredAcs.length - limit }} flere, begrenset pga. ytelse)
+        ({{ filteredAcs.length - limit }} flere)
       </div>
   </div>
 </template>
