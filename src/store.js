@@ -97,10 +97,11 @@ export default new Vuex.Store({
         console.log(`Too many lists found with id: ${data.listId}, something is probably wrong.`)
         return
       }
-
       listMatch[0].acs = listMatch[0].acs.filter(ac => {
         return ac.id !== data.acId
       })
+      // set last update
+      listMatch[0].lastUpdate = moment().format()
       console.log(`ac with id: ${data.acId} removed.`)
     },
     // user preferences
