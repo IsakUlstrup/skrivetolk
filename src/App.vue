@@ -2,7 +2,7 @@
   <div id="app" v-bind:style="userStyle">
     <section class="sidePanel f" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
-      <router-view id="router" class="p2 fa bbn btn"></router-view>
+      <router-view id="router" class="p1 fa bbn btn"></router-view>
       <div>
         <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
       </div>
@@ -83,7 +83,7 @@ export default {
   /* box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8); */
   transition: left 0.2s;
   /* flex: 1 0 400px; */
-  min-width: 400px;
+  min-width: 200px;
   position: absolute;
   left: 0;
   top: 0;
