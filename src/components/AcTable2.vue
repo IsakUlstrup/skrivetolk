@@ -129,6 +129,8 @@ export default {
     deleteAc(listId, acId) {
       console.log('Deleting: ', listId, ' - ', acId)
       this.$store.commit('deleteAc', {listId, acId})
+
+
     }
   }
 }
