@@ -24,9 +24,9 @@ table {
 
 /* Global variables */
 :root {
-  --spacing1: 5%;
-  --spacing2: 3%;
-  --spacing3: 1%;
+  --spacing1: 50px;
+  --spacing2: 30px;
+  --spacing3: 10px;
   --header1Font: Diavlo, sans-serif;
 }
 

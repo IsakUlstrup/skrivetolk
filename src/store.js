@@ -40,10 +40,12 @@ export default new Vuex.Store({
         console.log('Adding list: ', list.id)
         this.state.acLists.push(list)
       }
+      this.commit('saveState')
     },
     removelist (state, list) {
       var listIndex = this.state.acLists.indexOf(list)
       this.state.acLists.splice(listIndex, 1)
+      this.commit('saveState')
     },
     addAc (state, data) {
       var listMatch = this.state.acLists.filter(l => {return l.id === data.listId})
@@ -56,32 +58,11 @@ export default new Vuex.Store({
         listMatch[0].acs.push(ac)
         listMatch[0].lastUpdate = moment().format()
       }
+      this.commit('saveState')
     },
-    updateAc (state, data) {
-      console.log('Store: updating ac: ', data)
-
-      // find list
-      var listMatch = state.acLists.filter(list => {
-        return list.id === data.listId
-      })
-      // error handlig
-      if (listMatch.length === 0) {
-        console.log(`No lists with id: ${data.listId} found.`)
-        return
-      }
-
-      if (listMatch.length > 1) {
-        console.log(`Too many lists found with id: ${data.listId}, something is probably wrong.`)
-        return
-      }
-
-      listMatch[0].lastUpdate = moment().format()
-
-      // var acMatch = listMatch[0].acs.filter(ac => {
-      //   return ac.id === data.id
-      // })
-
-      // console.log('Store: ac match: ', acMatch)
+    saveState (state) {
+      // save state to localStorage
+      localStorage.setItem('store', JSON.stringify(state))
     },
     deleteAc (state, data) {
       var listMatch = state.acLists.filter(list => {
@@ -103,6 +84,7 @@ export default new Vuex.Store({
       // set last update
       listMatch[0].lastUpdate = moment().format()
       console.log(`ac with id: ${data.acId} removed.`)
+      this.commit('saveState')
     },
     // user preferences
     setPreference (state, payload) {
@@ -129,6 +111,7 @@ export default new Vuex.Store({
           value: payload.value
         })
       }
+      this.commit('saveState')
     }
   },
   getters: {

@@ -17,13 +17,14 @@
       name="list"
       tag="ul">
         <li
-        class="f br2 m3"
+        class="f fw br2 m3"
         v-for="ac in filteredAcs.slice(0, limit)"
         :key="ac.id"
         >
-          <input class="p3 i fa ct" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
-          <input class="p3 i fa ct" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
-          <div class="edit f fa p3">
+          <input class="p3 i fa" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
+          <input class="p3 i fa" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
+          <a class="l toggleDetails" @click="editAc(ac)">⋮</a>
+          <div class="details f p3" v-if="ac.editMode">
             <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
             <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
 
@@ -40,6 +41,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'AcTable2',
   props: {
@@ -63,6 +66,11 @@ export default {
     }
   },
   methods: {
+    toggleDetails(ac) {
+      // event.path[1].classList.toggle("showDetails")
+      // console.log(event)
+      ac.details = ! ac.details
+    },
     sort() {
       // console.log('sorting')
       this.acList.acs.sort(function(a, b) {
@@ -106,16 +114,16 @@ export default {
         // enable edit mode
         this.$set(obj, 'editMode', true);
       } else {
+        // disable edit mode, save
         this.$set(obj, 'editMode', undefined)
-        // save, disable dit mode
-        // console.log(obj, this.acList.id)
-        var data = {
-          listId: this.acList.id,
-          id: obj.id,
-          in: obj.in,
-          out: obj.out
-        }
-        this.$store.commit('updateAc', data)
+        // var data = {
+        //   listId: this.acList.id,
+        //   id: obj.id,
+        //   in: obj.in,
+        //   out: obj.out
+        // }
+        this.acList.lastUpdate = moment().format()
+        this.$store.commit('saveState')
       }
     },
     deleteAc(listId, acId) {
@@ -146,6 +154,13 @@ ul li:hover {
 }
 input:disabled {
   border: 1px solid #282828;
+}
+.details {
+  flex: 100%;
+}
+.toggleDetails {
+  display: block;
+  flex: 1;
 }
 .list {
   max-height: 300px;

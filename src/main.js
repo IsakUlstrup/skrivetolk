@@ -4,9 +4,9 @@ import store from './store'
 import router from './router'
 
 // save store to localStorage when something changes
-store.subscribe((mutation, state) => {
-  localStorage.setItem('store', JSON.stringify(state))
-})
+// store.subscribe((mutation, state) => {
+//   localStorage.setItem('store', JSON.stringify(state))
+// })
 
 new Vue({
   router,
