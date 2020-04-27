@@ -83,6 +83,9 @@ export default {
 .input {
   outline: none;
 }
+.input:focus {
+  border: 1px solid rgb(247, 5, 255)
+}
 .acIn {
   border-radius: 3px 0 0 3px;
 }
@@ -101,6 +104,7 @@ a {
   text-decoration: none;
   display: block;
   border-radius: 0 3px 3px 0;
+  cursor: pointer;
 }
 a:hover {
   color: white;
