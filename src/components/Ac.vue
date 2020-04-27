@@ -1,0 +1,112 @@
+<template>
+  <li
+    class="f br2 m3 ac"
+    v-bind:class="{ highlight: active }"
+  >
+    <input
+      class="acIn input p3 fa"
+      type="text"
+      name="ac.in"
+      v-model="acData.in"
+      @keyup="save"
+      @focus="activate"
+      @blur="deactivate"
+    >
+
+    <input
+      class="acOut input p3 fa"
+      type="text"
+      name="ac.out"
+      v-model="acData.out"
+      @keyup="save"
+      @focus="activate"
+      @blur="deactivate"
+    >
+    <a
+      class="p3"
+      href="#"
+      @click="deleteAc"
+      tabindex="-1"
+    >✕</a>
+  </li>
+</template>
+
+<script>
+export default {
+  name: 'Ac',
+  props: {
+    acData: Object,
+    listId: String
+  },
+  data: () => {
+    return {
+      active: false
+    }
+  },
+  methods: {
+    activate() {
+      // console.log(this.$refs.li)
+      this.active = true
+    },
+    deactivate() {
+      this.active = false
+    },
+    save() {
+      // TODO: update date for last list change
+      this.$store.commit('saveState')
+    },
+    deleteAc() {
+      this.$store.commit(
+        'deleteAc',
+        {
+          listId: this.listId,
+          acId: this.acData.id,
+      })
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+.ac {
+  transition: all 0.4s ease-out;
+  border: 1px solid #333;
+  overflow: hidden;
+}
+.ac:hover {
+  background: #222;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.ac input {
+  border: 1px solid #151515;
+}
+.input {
+  outline: none;
+}
+.acIn {
+  border-radius: 3px 0 0 3px;
+}
+.acOut {
+  border-radius: 0 3px 3px 0;
+}
+.highlight {
+  background: #222;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  transform: scale(1.04);
+  border: 3px solid rgb(15, 154, 189);
+}
+a {
+  color: #555;
+  flex: 2;
+  text-decoration: none;
+  display: block;
+  border-radius: 0 3px 3px 0;
+}
+a:hover {
+  color: white;
+  background: #8A2387;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+</style>
