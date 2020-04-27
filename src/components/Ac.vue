@@ -4,7 +4,7 @@
     v-bind:class="{ highlight: active }"
   >
     <input
-      class="acIn input p3 fa"
+      class="acIn i input p3 fa"
       type="text"
       name="ac.in"
       v-model="acData.in"
@@ -14,7 +14,7 @@
     >
 
     <input
-      class="acOut input p3 fa"
+      class="acOut i input p3 fa"
       type="text"
       name="ac.out"
       v-model="acData.out"
@@ -24,7 +24,6 @@
     >
     <a
       class="p3"
-      href="#"
       @click="deleteAc"
       tabindex="-1"
     >✕</a>
