@@ -84,7 +84,8 @@ export default {
   outline: none;
 }
 .input:focus {
-  border: 1px solid rgb(247, 5, 255)
+  /* border: 1px solid rgb(247, 5, 255) */
+  box-shadow: 0 0 6px rgba(15, 154, 189, 0.8) inset;
 }
 .acIn {
   border-radius: 3px 0 0 3px;
@@ -95,12 +96,12 @@ export default {
 .highlight {
   background: #222;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-  transform: scale(1.04);
+  transform: scale(1.03);
   border: 3px solid rgb(15, 154, 189);
 }
 a {
   color: #555;
-  flex: 2;
+  flex: 1 0 fit-content;
   text-decoration: none;
   display: block;
   border-radius: 0 3px 3px 0;
@@ -108,8 +109,5 @@ a {
 }
 a:hover {
   color: white;
-  background: #8A2387;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>
