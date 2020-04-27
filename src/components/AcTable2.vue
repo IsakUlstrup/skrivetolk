@@ -17,14 +17,17 @@
       name="list"
       tag="ul">
         <li
-        class="f fw br2 m3"
+        class="f fw br2 m3 ac"
+        v-bind:class="{ highlight: ac.editMode }"
         v-for="ac in filteredAcs.slice(0, limit)"
         :key="ac.id"
         >
-          <input class="p3 i fa" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
-          <input class="p3 i fa" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
-          <a class="l toggleDetails" @click="editAc(ac)">⋮</a>
-          <div class="details f p3" v-if="ac.editMode">
+          <div class="acData f f100">
+            <input class="p3 i fa" type="text" name="ac.in" :disabled="!ac.editMode" v-model="ac.in">
+            <input class="p3 i fa" type="text" name="ac.out" :disabled="!ac.editMode" v-model="ac.out">
+            <a class="l toggleDetails p3 ct" @click="editAc(ac)">⋮</a>
+          </div>
+          <div class="details f100 f p3" v-if="ac.editMode">
             <a class="l tdn mr3" v-if="!ac.editMode" @click="editAc(ac)">✏️</a>
             <a class="l tdn mr3" v-else @click="editAc(ac)">💾</a>
 
@@ -144,25 +147,40 @@ export default {
   transform: translateX(30px);
   opacity: 0;
 }
-
-
-ul li {
+.ac {
   transition: all 0.4s ease-out;
+  border: 1px solid #333;
 }
-ul li:hover {
+.ac:hover {
   background: #222;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   transform: scale(1.04);
 }
+.ac input {
+  border: 1px solid #151515;
+}
+.acData {
+  border-bottom: 1px solid #333;
+}
 input:disabled {
   border: 1px solid #282828;
 }
-.details {
-  flex: 100%;
+.highlight {
+  background: #222;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  transform: scale(1.04);
 }
 .toggleDetails {
   display: block;
-  flex: 1;
+  text-decoration: none;
+  font-weight: bolder;
+  flex: 3;
+  border-left: 1px solid #333;
+  color: #666;
+}
+.toggleDetails:hover {
+  background: #181818;
+  color: white;
 }
 .list {
   max-height: 300px;
