@@ -9,6 +9,7 @@
 
       <input v-model="filter" class="p3 mb2 w100 br3 b" type="text" placeholder="filter">
     </div> -->
+    <addAc v-bind:acList="acList"/>
 
     <transition-group
       class="list w100 lsn"
@@ -31,11 +32,13 @@
 
 <script>
 import Ac from './Ac'
+import AddAc from './AddAc'
 
 export default {
   name: 'AcTable2',
   components: {
-    Ac
+    Ac,
+    AddAc
   },
   props: {
     acList: Object,

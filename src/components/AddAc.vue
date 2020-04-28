@@ -1,21 +1,45 @@
 <template>
-  <div id="AddAutoCorrect">
-    <strong>Legg til</strong>
-    <br>
-    <input class="i" v-model="formData.in" type="text" placeholder="Inn" name="in" v-on:keyup.enter="add">
-    <input class="i" v-model="formData.out" type="text" placeholder="Ut" name="out" v-on:keyup.enter="add">
-    <input class="i" type="button" value="Legg Til" :disabled="this.formData.in === '' || this.formData.out === ''" @click="add">
+  <div class="AddAc br2 f m3"
+  v-bind:class="{ highlight: active }"
+  >
+    <input
+      class="input p3 fa"
+      type="text"
+      placeholder="inn"
+      autocomplete=off
+      name="newAc.in"
+      v-model="formData.in"
+      @focus="activate"
+      @blur="deactivate"
+    >
+
+    <input
+      class="input p3 fa"
+      type="text"
+      placeholder="Ut"
+      autocomplete=off
+      name="newAc.out"
+      v-model="formData.out"
+      @focus="activate"
+      @blur="deactivate"
+    >
+    <a
+      class="p3"
+      @click="add"
+      tabindex="-1"
+    >+</a>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AddAutoCorrect',
+  name: 'AddAc',
   props:{
     acList: Object
   },
   data () {
     return {
+      active: false,
       formData: {
         in: '',
         out: ''
@@ -37,10 +61,45 @@ export default {
         this.formData.in = ''
         this.formData.out = ''
       }
+    },
+    activate() {
+      this.active = true
+    },
+    deactivate() {
+      this.active = false
     }
   }
 }
 </script>
 
 <style scoped>
+.AddAc {
+  border: 1px solid #333;
+  transition: all 0.4s ease-out;
+}
+.input {
+  outline: none;
+  border: none;
+  overflow: hidden;
+  border-right: 1px solid #333;
+}
+.input:focus {
+  box-shadow: 0 0 6px rgba(15, 154, 189, 0.8) inset;
+}
+.highlight {
+  background: #222;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+  transform: scale(1.04);
+  border: 3px solid rgb(15, 154, 189);
+}
+a {
+  color: #555;
+  flex: 1 0 fit-content;
+  text-decoration: none;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+}
+a:hover {
+  color: white;
+}
 </style>
