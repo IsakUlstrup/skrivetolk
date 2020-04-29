@@ -4,6 +4,7 @@
       <li><router-link to="/">⌂</router-link></li>
       <li><router-link to="/manage">✎</router-link></li>
       <li><router-link to="/debug">⚙︎</router-link></li>
+      <li><router-link to="/session">⦷</router-link></li>
     </ul>
   </nav>
 </template>
