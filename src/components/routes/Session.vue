@@ -65,7 +65,7 @@ export default {
         }
 
         this.session = response.data
-        this.connectionDetails.sessionId = this.session.publicId
+        this.connectionDetails.sessionId = this.session.privateId
         this.connect()
       })
       .catch((error) => {
