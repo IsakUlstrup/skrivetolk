@@ -1,18 +1,26 @@
 <template>
   <div class="Session">
     <div class="mv2">
-      <h3>New session</h3>
-      <input class="p3 br2 w100" type="text" name="host" placeholder="url" v-model="connectionDetails.host">
-      <input class="p3 br2 w100" type="text" name="port" placeholder="port" v-model="connectionDetails.port">
-      <input class="p3 br2 w100" type="button" value="New" @click="newSession">
+      <input class="p3 br2 w100" type="button" value="New session" @click="newSession">
     </div>
 
     <div class="mv2">
-      <h3>Connect to session</h3>
-      <input class="p3 br2 w100" type="text" name="host" placeholder="url" v-model="connectionDetails.host">
-      <input class="p3 br2 w100" type="text" name="port" placeholder="port" v-model="connectionDetails.port">
-      <input class="p3 br2 w100" type="text" name="session" placeholder="session" v-model="connectionDetails.sessionId">
-      <input class="p3 br2 w100" type="button" value="New" @click="connect">
+      <input class="p3 br2 mb3 w100" type="text" name="session" placeholder="sessionId" v-model="connectionDetails.sessionId">
+      <input class="p3 br2 w100" type="button" value="Connect to session" @click="connect">
+    </div>
+    <div class="mv2">
+      <input class="p3 br2" type="button" value="Ping" @click="ping">
+    </div>
+
+    <div class="status">
+      <h3 class="mv3 h3">Status</h3>
+        <ul class="lsn mv3">
+          <li>socket: {{ status }}</li>
+          <li>privateId: {{ session.privateId }}</li>
+          <li>publicId: {{ session.publicId }}</li>
+        </ul>
+        <h3 class="mv3 h3">Log</h3>
+        <div>{{logData}}</div>
     </div>
 
   </div>
@@ -26,39 +34,60 @@ export default {
   data: () => {
     return {
       connectionDetails: {
+        host: '192.168.0.7',
+        port: '8888',
         protocol: 'ws'
       },
-      socketData: null,
-      status: 'idle',
+      status: '',
+      session: {},
       socket: null,
-      wsLog: ''
+      logData: ''
     }
   },
   methods: {
+    ping() {
+      if (this.socket) {
+        this.socket.send('ping')
+      }
+    },
+    log(msg) {
+      this.logData += `\n${msg}`
+    },
     newSession() {
       axios.get(`http://${this.connectionDetails.host}:${this.connectionDetails.port}/new`)
-      .then(function (response) {
-        console.log(response.data);
+      .then((response) => {
+        console.log(response.data)
+
+        // error handling
+        if (typeof response.data.privateId === 'undefined' || typeof response.data.publicId === 'undefined') {
+          console.log('invalid session details recieved from server')
+          return
+        }
+
+        this.session = response.data
+        this.connectionDetails.sessionId = this.session.publicId
+        this.connect()
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        this.log(error)
+        this.status = 'network error'
       })
       .finally(function () {
         // always executed
-      }); 
+      })
     },
     connect() {
       this.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}:${this.connectionDetails.port}/?id=${this.connectionDetails.sessionId}`)
-      this.socket.onopen = function() {
-        console.log("[open] Connection established")
-        // this.wsLog += '\n[open] Connection established'
+      this.socket.onopen = () => {
+        this.log("[open] Connection established")
+        this.status = 'connected'
       }
-      this.socket.onmessage = function(event) {
-        console.log(`[message] Data received from server: ${event.data}`)
-        // this.wsLog += `\n[message] Data received from server: ${event.data}`
+      this.socket.onmessage = (event) => {
+        this.log(`[message] Data received from server: ${event.data}`)
       }
-      this.socket.onclose = function(event) {
-        console.log('Connection closed: ', event.code, event.reason)
+      this.socket.onclose = (event) => {
+        this.log('Connection closed: ', event.code, event.reason)
+        this.status = 'closed'
       }
     }
   }
