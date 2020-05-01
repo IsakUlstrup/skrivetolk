@@ -15,7 +15,7 @@ const routes = [
   { path: '/interpeter', component: Interpeter},
   { path: '/manage', component: ManageAcs},
   { path: '/debug', component: Debug},
-  { path: '/session', component: Session}
+  { path: '/session/:id?', component: Session}
 ]
 
 export default new VueRouter({

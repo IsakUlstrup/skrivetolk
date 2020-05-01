@@ -14,10 +14,15 @@
 
     <div class="status">
       <h3 class="mv3 h3">Status</h3>
+        <p v-if="$route.params.id">id from url: {{ $route.params.id }}</p>
         <ul class="lsn mv3">
           <li>socket: {{ connection.status }}</li>
-          <li>privateId: {{ connection.sessionIds.privateId }}</li>
-          <li>publicId: {{ connection.sessionIds.publicId }}</li>
+          <li v-if="connection.sessionIds.privateId">
+            <router-link :to="connection.sessionIds.privateId | sessionLink">Link for tolk</router-link>
+          </li>
+          <li v-if="connection.sessionIds.publicId">
+            <router-link :to="connection.sessionIds.publicId | sessionLink">Link for bruker</router-link>
+          </li>
         </ul>
         <h3 class="mv3 h3">Log</h3>
         <ul class="lsn">
@@ -46,6 +51,18 @@ export default {
         protocol: 'ws'
       },
       logData: []
+    }
+  },
+  mounted() {
+    if (typeof this.$route.params.id !== 'undefined') {
+      console.log('id set in url, autoconnect')
+      this.connectionDetails.sessionId = this.$route.params.id
+      this.connect()
+    }
+  },
+  filters: {
+    sessionLink: (id) => {
+      return `/session/${id}`
     }
   },
   methods: {
@@ -99,6 +116,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+a {
+  color: white;
+}
+a:visited {
+  color: white;
+}
 </style>
