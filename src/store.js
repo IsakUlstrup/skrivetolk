@@ -19,6 +19,10 @@ export default new Vuex.Store({
 				)
 			}
     },
+    webSocket (state, data) {
+      state.connection = data
+      this.commit('saveState')
+    },
     // AutoCorrect stuff
     addList (state, listData) {
       // console.log('in: ', listData)
@@ -115,6 +119,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    webSocket: (state) => {
+      return state.connection
+    },
     // return user preference by key
     userPreference: (state) => (key) => {
       if (state.userPreferences.length === 0) {
