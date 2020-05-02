@@ -103,6 +103,7 @@ export default {
       this.connection.socket.onopen = () => {
         this.log("[open] Connection established")
         this.connection.status = 'connected'
+        this.$store.commit('webSocket', this.connection)
       }
       this.connection.socket.onmessage = (event) => {
         this.log(`[message] Data received from server: ${event.data}`)
