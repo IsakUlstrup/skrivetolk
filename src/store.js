@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     acLists: [],
-    userPreferences: []
+    userPreferences: [],
+    connection: {}
+
   },
   mutations: {
     initialiseStore(state) {
@@ -119,7 +121,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    webSocket: (state) => {
+    getConnection: state => {
       return state.connection
     },
     // return user preference by key

@@ -1,7 +1,7 @@
 <template>
   <div id="MainInput" class="f p1">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
-    <textarea class="fa" v-bind:style="userStyle" v-model="inputData" rows="30" v-on:keyup.prevent="handleInput"></textarea>
+    <textarea class="fa" v-bind:style="userStyle" v-model="inputData" rows="30" v-on:keyup.prevent="handleInput2"></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
@@ -24,6 +24,17 @@ export default {
     }
   },
   methods: {
+    handleInput2() {
+      // console.log(this.$store.getters.getConnection)
+      this.connection.socket.send(JSON.stringify({
+        header: 'content',
+        data: this.inputData
+        }))
+      // if (this.connection) {
+      //   console.log(this.connection)
+      //   // this.connection.send(this.inputData)
+      // }
+    },
     handleInput() {
       var output = this.inputData.split(/[ ,.]/).slice(-50)
       this.currentWord = output[output.length -1]
@@ -51,6 +62,14 @@ export default {
     }
   },
   computed: {
+    connection() {
+      var connection = this.$store.getters.getConnection
+      if (connection) {
+        return connection
+      } else {
+        return false
+      }
+    },
     userStyle() {
       return {
         color: this.$store.getters.color('textColor'),
