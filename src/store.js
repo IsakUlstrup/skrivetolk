@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     acLists: [],
     userPreferences: [],
-    connection: {}
+    connection: undefined
 
   },
   mutations: {
@@ -23,7 +23,6 @@ export default new Vuex.Store({
     },
     webSocket (state, data) {
       state.connection = data
-      this.commit('saveState')
     },
     // AutoCorrect stuff
     addList (state, listData) {
@@ -68,7 +67,7 @@ export default new Vuex.Store({
     },
     saveState (state) {
       // save state to localStorage
-      localStorage.setItem('store', JSON.stringify(state))
+      localStorage.setItem('store', JSON.stringify({acLists: state.acLists, userPreferences: state.userPreferences}))
     },
     deleteAc (state, data) {
       var listMatch = state.acLists.filter(list => {
@@ -122,7 +121,11 @@ export default new Vuex.Store({
   },
   getters: {
     getConnection: state => {
-      return state.connection
+      if (state.connection !== undefined) {
+        return state.connection
+      } else {
+        return false
+      }
     },
     // return user preference by key
     userPreference: (state) => (key) => {

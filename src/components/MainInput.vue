@@ -1,7 +1,7 @@
 <template>
   <div id="MainInput" class="f p1">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
-    <textarea class="fa" v-bind:style="userStyle" v-model="inputData" rows="30" v-on:keyup.prevent="handleInput2"></textarea>
+    <textarea class="fa" v-bind:style="userStyle" v-model="inputData" rows="30" v-on:keyup="handleInput2"></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
@@ -18,7 +18,7 @@ export default {
   },
   data () {
     return {
-      inputData: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus',
+      inputData: '',
       acResults: [],
       currentWord: ''
     }
@@ -26,14 +26,21 @@ export default {
   methods: {
     handleInput2() {
       // console.log(this.$store.getters.getConnection)
+
+
+      // this.connection.socket.addEventListener('onmessage', function (event) {
+      //   console.log('event: ', event.data)
+      // })
+
+      // this.connection.socket.onmessage = (event) => {
+      //   console.log(`[message] Data received from server: ${event.data}`)
+      //   this.inputData = event.data.data
+      // }
+      if (!this.connection) return
       this.connection.socket.send(JSON.stringify({
         header: 'content',
         data: this.inputData
-        }))
-      // if (this.connection) {
-      //   console.log(this.connection)
-      //   // this.connection.send(this.inputData)
-      // }
+      }))
     },
     handleInput() {
       var output = this.inputData.split(/[ ,.]/).slice(-50)
@@ -64,11 +71,13 @@ export default {
   computed: {
     connection() {
       var connection = this.$store.getters.getConnection
-      if (connection) {
+
+      if (connection && connection.status === 'connected') {
         return connection
       } else {
         return false
       }
+
     },
     userStyle() {
       return {
@@ -79,7 +88,26 @@ export default {
     acStartsWith() {
       return null
     }
-  }
+  },
+  watch: {
+    // whenever question changes, this function will run
+    connection: function (newConnection) {
+      if (newConnection.status === 'connected') {
+        newConnection.socket.addEventListener('message', (event) => {
+          // console.log('event: ', event.data)
+          // this.setInputValue('hei')
+          var messageObject = JSON.parse(event.data)
+          if (messageObject.header === 'content' && messageObject.data) {
+            console.log('new data recieved, replacing input value:', messageObject.data)
+            this.inputData = messageObject.data
+          }
+        })
+        console.log('connected')
+      }
+      // this.answer = 'Waiting for you to stop typing...'
+      // this.debouncedGetAnswer()
+    }
+  },
 }
 </script>
 

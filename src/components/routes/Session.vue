@@ -25,9 +25,7 @@
           </li>
         </ul>
         <h3 class="mv3 h3">Log</h3>
-        <ul class="lsn">
-          <li class="mv3" v-for="logEntry in logData" :key="logEntry">{{logEntry}}</li>
-        </ul>
+        {{logData}}
     </div>
 
   </div>
@@ -50,7 +48,7 @@ export default {
         port: '8888',
         protocol: 'ws'
       },
-      logData: []
+      logData: ''
     }
   },
   mounted() {
@@ -72,7 +70,7 @@ export default {
       }
     },
     log(msg) {
-      this.logData.push(msg)
+      this.logData += msg
     },
     newSession() {
       axios.get(`http://${this.connectionDetails.host}:${this.connectionDetails.port}/new`)
@@ -105,9 +103,9 @@ export default {
         this.connection.status = 'connected'
         this.$store.commit('webSocket', this.connection)
       }
-      this.connection.socket.onmessage = (event) => {
-        this.log(`[message] Data received from server: ${event.data}`)
-      }
+      // this.connection.socket.onmessage = (event) => {
+      //   this.log(`[message] Data received from server: ${event.data}`)
+      // }
       this.connection.socket.onclose = (event) => {
         this.log('Connection closed: ', event.code, event.reason)
         this.connection.status = 'closed'
