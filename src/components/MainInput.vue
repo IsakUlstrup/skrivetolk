@@ -81,8 +81,8 @@ export default {
     },
     userStyle() {
       return {
-        color: this.$store.getters.color('textColor'),
-        'font-size': this.$store.getters.userPreference('textSize')
+        color: this.$store.getters.userPreference('textColor') || 'black',
+        'font-size': this.$store.getters.userPreference('textSize') || '18px'
       }
     },
     acStartsWith() {

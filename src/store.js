@@ -139,8 +139,8 @@ export default new Vuex.Store({
       })
 
       if (matchingKeys.length === 0) {
-        console.log(`Key ${key} not found, returning null`)
-        return null
+        console.log(`Key ${key} not found, returning false`)
+        return false
       }
 
       // console.log('store returning: ', matchingKeys[0].value)

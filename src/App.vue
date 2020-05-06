@@ -39,7 +39,7 @@ export default {
   computed: {
     userStyle () {
       return {
-        background: this.$store.getters.color('backgroundColor')
+        background: this.$store.getters.userPreference('backgroundColor') || 'white'
       }
     },
     sidePanel() {
@@ -98,5 +98,8 @@ export default {
 }
 .moveRight {
   margin-left: 30%;
+}
+.l {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 </style>
