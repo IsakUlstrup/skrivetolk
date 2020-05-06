@@ -24,8 +24,6 @@
             <router-link :to="connection.sessionIds.publicId | sessionLink">Link for bruker</router-link>
           </li>
         </ul>
-        <h3 class="mv3 h3">Log</h3>
-        {{logData}}
     </div>
 
   </div>
@@ -47,8 +45,7 @@ export default {
         host: '192.168.0.7',
         port: '8888',
         protocol: 'ws'
-      },
-      logData: ''
+      }
     }
   },
   mounted() {
@@ -69,9 +66,6 @@ export default {
         this.connection.socket.send('ping')
       }
     },
-    log(msg) {
-      this.logData += msg
-    },
     newSession() {
       axios.get(`http://${this.connectionDetails.host}:${this.connectionDetails.port}/new`)
       .then((response) => {
@@ -88,7 +82,7 @@ export default {
         this.connect()
       })
       .catch((error) => {
-        this.log(error)
+        console.log(error)
         this.connection.status = 'network error'
       })
       .finally(function () {
@@ -99,7 +93,7 @@ export default {
       this.connection.status = 'connecting'
       this.connection.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}:${this.connectionDetails.port}/?id=${this.connectionDetails.sessionId}`)
       this.connection.socket.onopen = () => {
-        this.log("[open] Connection established")
+        console.log.log("[open] Connection established")
         this.connection.status = 'connected'
         this.$store.commit('webSocket', this.connection)
       }
@@ -107,7 +101,7 @@ export default {
       //   this.log(`[message] Data received from server: ${event.data}`)
       // }
       this.connection.socket.onclose = (event) => {
-        this.log('Connection closed: ', event.code, event.reason)
+        console.log.log('Connection closed: ', event.code, event.reason)
         this.connection.status = 'closed'
       }
     }
