@@ -1,7 +1,7 @@
 <template>
   <div id="MainInput" class="f p1">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
-    <textarea class="fa" v-bind:style="userStyle" ref="mainInput" v-model="inputData" rows="30" v-on:keyup="handleInput2"></textarea>
+    <textarea class="fa" v-bind:style="userStyle" placeholder="Skriv her..." ref="mainInput" v-model="inputData" rows="30" v-on:keyup="handleInput2"></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
