@@ -1,7 +1,7 @@
 <template>
   <div id="MainInput" class="f p1">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
-    <textarea class="fa" v-bind:style="userStyle" v-model="inputData" rows="30" v-on:keyup="handleInput2"></textarea>
+    <textarea class="fa" v-bind:style="userStyle" ref="mainInput" v-model="inputData" rows="30" v-on:keyup="handleInput2"></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
@@ -24,21 +24,14 @@ export default {
     }
   },
   methods: {
+    scrollBottom() {
+      this.$refs.mainInput.scrollTop = this.$refs.mainInput.scrollHeight;
+      // textarea.scrollTop = textarea.scrollHeight
+    },
     handleInput2() {
-      // console.log(this.$store.getters.getConnection)
-
-
-      // this.connection.socket.addEventListener('onmessage', function (event) {
-      //   console.log('event: ', event.data)
-      // })
-
-      // this.connection.socket.onmessage = (event) => {
-      //   console.log(`[message] Data received from server: ${event.data}`)
-      //   this.inputData = event.data.data
-      // }
       if (!this.connection) return
       this.connection.socket.send(JSON.stringify({
-        header: 'content',
+        type: 'content',
         data: this.inputData
       }))
     },
@@ -97,12 +90,13 @@ export default {
           // console.log('event: ', event.data)
           // this.setInputValue('hei')
           var messageObject = JSON.parse(event.data)
-          if (messageObject.header === 'content' && messageObject.data) {
+          if (messageObject.type === 'content' && messageObject.data) {
             console.log('new data recieved, replacing input value:', messageObject.data)
             this.inputData = messageObject.data
+            this.scrollBottom()
           }
         })
-        console.log('connected')
+        console.log('New connection')
       }
       // this.answer = 'Waiting for you to stop typing...'
       // this.debouncedGetAnswer()

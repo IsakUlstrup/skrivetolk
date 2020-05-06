@@ -52,7 +52,7 @@ export default {
     if (typeof this.$route.params.id !== 'undefined') {
       console.log('id set in url, autoconnect')
       this.connectionDetails.sessionId = this.$route.params.id
-      this.connect()
+      this.connect(this.$route.params.id)
     }
   },
   filters: {
@@ -63,23 +63,30 @@ export default {
   methods: {
     ping() {
       if (this.connection.socket) {
-        this.connection.socket.send('ping')
+        this.connection.socket.send(JSON.stringify({
+          type: 'ping',
+          data: 'ping'
+        }))
       }
     },
     newSession() {
+      console.log('Requesting new session')
       axios.get(`http://${this.connectionDetails.host}:${this.connectionDetails.port}/new`)
       .then((response) => {
-        console.log(response.data)
+        console.log('Response:', response.data)
 
         // error handling
-        if (typeof response.data.privateId === 'undefined' || typeof response.data.publicId === 'undefined') {
+        if (typeof response.data.data.privateId === 'undefined' || typeof response.data.data.publicId === 'undefined') {
           console.log('invalid session details recieved from server')
           return
         }
 
-        this.connection.sessionIds = response.data
-        this.connectionDetails.sessionId = this.connection.sessionIds.privateId
-        this.connect()
+        this.connection.sessionIds = {
+          privateId: response.data.data.privateId,
+          publicId: response.data.data.publicId
+        }
+        // this.connectionDetails.sessionId = this.connection.sessionIds.privateId
+        this.connect(response.data.data.privateId)
       })
       .catch((error) => {
         console.log(error)
@@ -89,19 +96,19 @@ export default {
         // always executed
       })
     },
-    connect() {
+    connect(sessionId) {
       this.connection.status = 'connecting'
-      this.connection.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}:${this.connectionDetails.port}/?id=${this.connectionDetails.sessionId}`)
+      this.connection.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}:${this.connectionDetails.port}/?id=${sessionId}`)
       this.connection.socket.onopen = () => {
-        console.log.log("[open] Connection established")
+        // console.log("[open] Connection established")
         this.connection.status = 'connected'
         this.$store.commit('webSocket', this.connection)
       }
-      // this.connection.socket.onmessage = (event) => {
-      //   this.log(`[message] Data received from server: ${event.data}`)
-      // }
+      this.connection.socket.onmessage = (event) => {
+        console.log(`[server] ${event.data}`)
+      }
       this.connection.socket.onclose = (event) => {
-        console.log.log('Connection closed: ', event.code, event.reason)
+        console.log('Connection closed: ', event.code, event.reason)
         this.connection.status = 'closed'
       }
     }
