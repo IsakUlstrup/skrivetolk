@@ -5,6 +5,8 @@
 
     <ColorPicker class="mv2" v-bind:color="textColor" @newColor="setTextColor">Tekstfarge</ColorPicker>
 
+    <ColorPicker class="mv2" v-bind:color="highlightColor" @newColor="setHighlightColor">Kontrast</ColorPicker>
+
     <div class="mv2">
       Tekststørrelse: {{textSize}}
       <br>
@@ -37,6 +39,13 @@ export default {
         value: color
       })
     },
+    setHighlightColor(color) {
+      this.$store.commit({
+        type: 'setPreference',
+        key: 'highlightColor',
+        value: color
+      })
+    },
     setTextColor (color) {
       this.$store.commit({
         type: 'setPreference',
@@ -55,13 +64,16 @@ export default {
   },
   computed: {
     backgroundColor() {
-      return this.$store.getters.color('backgroundColor')
+      return this.$store.getters.userPreference('backgroundColor') || '#ffffff'
     },
     textColor() {
-      return this.$store.getters.color('textColor')
+      return this.$store.getters.userPreference('textColor') || '#000000'
+    },
+    highlightColor() {
+      return this.$store.getters.userPreference('highlightColor') || '#ffffff'
     },
     textSize() {
-      return this.$store.getters.userPreference('textSize')
+      return this.$store.getters.userPreference('textSize') || '14px'
     }
   }
 }
