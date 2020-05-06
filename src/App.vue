@@ -43,11 +43,7 @@ export default {
       }
     },
     sidePanel() {
-      var panelFlag = this.$store.getters.userPreference('showSidePanel')
-      if (!panelFlag) {
-        return false
-      }
-      return true
+      return this.$store.getters.userPreference('showSidePanel') || false
     }
   }
 }
