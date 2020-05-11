@@ -1,5 +1,6 @@
 <template>
-  <div id="app" v-bind:style="userStyle">
+  <!-- <div id="app" v-bind:style="userStyle"> -->
+  <div id="app">
     <section class="sidePanel f" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
@@ -23,10 +24,6 @@ export default {
     Navigation,
     MainInput
   },
-  data: () => {
-    return {
-    }
-  },
   methods: {
     toggleSidePanel() {
       this.$store.commit({
@@ -37,14 +34,12 @@ export default {
     }
   },
   computed: {
-    userStyle () {
-      return {
-        background: this.$store.getters.userPreference('backgroundColor') || 'white'
-      }
-    },
     sidePanel() {
       return this.$store.getters.userPreference('showSidePanel') || false
     }
+  },
+  beforeMount() {
+    document.documentElement.style.setProperty('--user-background-color', this.$store.getters.userPreference('backgroundColor') || '#ffffff')
   }
 }
 </script>

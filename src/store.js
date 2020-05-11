@@ -67,6 +67,7 @@ export default new Vuex.Store({
     },
     saveState (state) {
       // save state to localStorage
+      console.log('saving state to localStorage')
       localStorage.setItem('store', JSON.stringify({acLists: state.acLists, userPreferences: state.userPreferences}))
     },
     deleteAc (state, data) {
@@ -93,7 +94,7 @@ export default new Vuex.Store({
     },
     // user preferences
     setPreference (state, payload) {
-      console.log('set preference: ', payload.key, payload.value)
+      // console.log('set preference: ', payload.key, payload.value)
       // check if key exists
       var matchingKeys = state.userPreferences.filter( pref => {
         return pref.key === payload.key

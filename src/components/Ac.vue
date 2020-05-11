@@ -97,7 +97,7 @@ export default {
   background: #222;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
   transform: scale(1.04);
-  border: 3px solid rgb(15, 154, 189);
+  border: 3px solid var(--user-highlight-color);
 }
 a {
   color: #555;

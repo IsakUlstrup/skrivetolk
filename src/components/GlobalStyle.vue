@@ -13,6 +13,11 @@
 <script>
 export default {
   name: 'GlobalStyle',
+  methods: {
+    setStyle(cssVariable, value) {
+      document.documentElement.style.setProperty(cssVariable, value)
+    }
+  },
   computed: {
     userStyleStore() {
       return {
@@ -25,9 +30,11 @@ export default {
     }
   },
   watch: {
-    userStyleStore: (newStyle) => {
-      console.log('style changed: ', newStyle)
+    userStyleStore: function (newStyle) {
+      return newStyle
+      // console.log('style changed: ', newStyle)
       // document.documentElement.style.setProperty('--user-background-color', newStyle.backgroundColor)
+      // this.setStyle('--user-background-color', newStyle.backgroundColor)
     }
   }
 }

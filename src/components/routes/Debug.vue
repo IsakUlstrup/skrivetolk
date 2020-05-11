@@ -14,10 +14,6 @@
       <input @input="setTextSize" type="range" name="textSize" min="8" max="100">
     </div>
 
-    <div class="mv2">
-      <GlobalStyle />
-    </div>
-
     <div id="reset">
       <a id="reset" class="l" @click="resetLocalStorage"><strong>Nullstill localStorage</strong></a>
     </div>
@@ -26,12 +22,11 @@
 
 <script>
 import ColorPicker from '../ColorPicker'
-import GlobalStyle from '../GlobalStyle'
+
 export default {
   name: 'Debug',
   components: {
-    ColorPicker,
-    GlobalStyle
+    ColorPicker
   },
   methods: {
     resetLocalStorage () {
@@ -44,6 +39,7 @@ export default {
         key: 'backgroundColor',
         value: color
       })
+      document.documentElement.style.setProperty('--user-background-color', color)
     },
     setHighlightColor(color) {
       this.$store.commit({
@@ -51,6 +47,7 @@ export default {
         key: 'highlightColor',
         value: color
       })
+      document.documentElement.style.setProperty('--user-highlight-color', color)
     },
     setTextColor (color) {
       this.$store.commit({

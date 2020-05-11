@@ -33,9 +33,11 @@ ul {
   width: 60px;
 }
 li .router-link-exact-active {
-  background: #8A2387;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background: #8A2387; 
+background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387); 
+background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  */
+
+  background: var(--user-highlight-color);
 
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7) inset;
 }
