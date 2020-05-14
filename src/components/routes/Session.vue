@@ -39,7 +39,8 @@ export default {
       connection: {
         status: 'initial',
         sessionIds: {},
-        socket: undefined
+        socket: undefined,
+        writePermission: false
       },
       connectionDetails: {
         host: '192.168.0.7',
@@ -100,12 +101,19 @@ export default {
       this.connection.status = 'connecting'
       this.connection.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}:${this.connectionDetails.port}/?id=${sessionId}`)
       this.connection.socket.onopen = () => {
-        // console.log("[open] Connection established")
+        console.log("[open] Connection established")
         this.connection.status = 'connected'
         this.$store.commit('webSocket', this.connection)
       }
       this.connection.socket.onmessage = (event) => {
         console.log(`[server] ${event.data}`)
+        if (JSON.parse(event.data).data.writePermission) {
+          // console.log(JSON.parse(event.data).data.writePermission)
+          // set write permission flag in stored socket object
+          console.log('write permission true')
+          this.connection.writePermission = true
+          this.$store.commit('webSocket', this.connection)
+        }
       }
       this.connection.socket.onclose = (event) => {
         console.log('Connection closed: ', event.code, event.reason)

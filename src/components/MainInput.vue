@@ -9,7 +9,8 @@
       v-model="inputData"
       rows="30"
       v-on:keyup="handleInput2"
-      @change="inputChanged"
+      @blur="inputChanged"
+      :disabled=" connection && !connection.writePermission"
     ></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
