@@ -39,7 +39,7 @@ export default {
         key: 'backgroundColor',
         value: color
       })
-      document.documentElement.style.setProperty('--user-background-color', color)
+      // document.documentElement.style.setProperty('--user-background-color', color)
     },
     setHighlightColor(color) {
       this.$store.commit({
@@ -47,7 +47,7 @@ export default {
         key: 'highlightColor',
         value: color
       })
-      document.documentElement.style.setProperty('--user-highlight-color', color)
+      // document.documentElement.style.setProperty('--user-highlight-color', color)
     },
     setTextColor (color) {
       this.$store.commit({
