@@ -107,6 +107,7 @@ export default new Vuex.Store({
 
       if (matchingKeys.length === 1) {
         matchingKeys[0].value = payload.value
+        this.commit('saveState')
         return
       }
 
@@ -116,8 +117,8 @@ export default new Vuex.Store({
           key: payload.key,
           value: payload.value
         })
+        this.commit('saveState')
       }
-      this.commit('saveState')
     }
   },
   getters: {
