@@ -1,7 +1,7 @@
 <template>
   <nav id="Navigation">
     <ul>
-      <li><router-link to="/">⌂</router-link></li>
+      <li><router-link to="/home">⌂</router-link></li>
       <li><router-link to="/manage">✎</router-link></li>
       <li><router-link to="/debug">⚙︎</router-link></li>
       <li><router-link to="/session">⦷</router-link></li>
@@ -32,7 +32,7 @@ ul {
   list-style: none;
   width: 60px;
 }
-li .router-link-exact-active {
+li .router-link-active {
   /* background: #8A2387; 
 background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387); 
 background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  */

@@ -11,11 +11,11 @@ import Session from './components/routes/Session'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: MainPage },
   { path: '/interpeter', component: Interpeter},
   { path: '/manage', component: ManageAcs},
   { path: '/debug', component: Debug},
-  { path: '/session/:id?', component: Session}
+  { path: '/session/:id?', component: Session},
+  { path: '/*', component: MainPage }
 ]
 
 export default new VueRouter({

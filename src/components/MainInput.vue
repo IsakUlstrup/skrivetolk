@@ -1,7 +1,16 @@
 <template>
   <div id="MainInput" class="f p1">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
-    <textarea class="fa" v-bind:style="userStyle" placeholder="Skriv her..." ref="mainInput" v-model="inputData" rows="30" v-on:keyup="handleInput2"></textarea>
+    <textarea
+      class="fa"
+      v-bind:style="userStyle"
+      placeholder="Skriv her..."
+      ref="mainInput"
+      v-model="inputData"
+      rows="30"
+      v-on:keyup="handleInput2"
+      @change="inputChanged"
+    ></textarea>
     <ul id="autocompleteResults">
       <li v-for="ac in acResults.slice(0, 10)" :key="ac.in">
         {{ac.out}}
@@ -24,6 +33,9 @@ export default {
     }
   },
   methods: {
+    inputChanged() {
+      console.log('input changed')
+    },
     scrollBottom() {
       this.$refs.mainInput.scrollTop = this.$refs.mainInput.scrollHeight;
       // textarea.scrollTop = textarea.scrollHeight
@@ -83,12 +95,9 @@ export default {
     }
   },
   watch: {
-    // whenever question changes, this function will run
     connection: function (newConnection) {
       if (newConnection.status === 'connected') {
         newConnection.socket.addEventListener('message', (event) => {
-          // console.log('event: ', event.data)
-          // this.setInputValue('hei')
           var messageObject = JSON.parse(event.data)
           if (messageObject.type === 'content' && messageObject.data) {
             console.log('new data recieved, replacing input value:', messageObject.data)
@@ -98,8 +107,6 @@ export default {
         })
         console.log('New connection')
       }
-      // this.answer = 'Waiting for you to stop typing...'
-      // this.debouncedGetAnswer()
     }
   },
 }
