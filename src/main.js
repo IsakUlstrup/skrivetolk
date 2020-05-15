@@ -104,7 +104,6 @@ app.get('/new', function (req, res) {
   // TODO: some sort of cooldown to prevent DoS attacks
   var newSession = new Session(uuid.v4(), uuid.v4())
   sessions.push(newSession)
-  // res.json({publicId: newSession.publicId, privateId: newSession.privateId})
 
   res.json({
     type: 'connection',

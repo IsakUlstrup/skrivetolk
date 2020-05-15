@@ -14,13 +14,17 @@ class Session {
 
     // broadcast
     this.sockets.forEach(socket => {
-      // console.log('sending: ', data)
       socket.send(data)
     })
   }
   // broadcast content
-  broadCastContent(data) {
-    return data
+  broadCastContent() {
+    this.sockets.forEach(socket => {
+      socket.send(JSON.stringify({
+        type: 'content',
+        data: this.content
+      }))
+    })
   }
   // broadcast to all admin sockets
   privateBroadcast(data) {
@@ -28,6 +32,9 @@ class Session {
       socket.admin === true
     })
     console.log('broadcast to private sockets: ', privateSockets)
+    privateSockets.forEach(socket => {
+      socket.send(data)
+    })
   }
 }
 
