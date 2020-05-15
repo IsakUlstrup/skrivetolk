@@ -9,7 +9,7 @@ Requirements:
 $ git clone https://github.com/IsakUlstrup/skrivetolk.git
 $ cd skrivetolk
 # build client
-$ npm run build-client
+$ npm run client-build
 # install & run server
 $ npm install
 $ npm run start
