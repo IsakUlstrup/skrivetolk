@@ -43,13 +43,14 @@ export default {
         writePermission: false
       },
       connectionDetails: {
-        host: '192.168.0.7',
-        port: '8888',
+        host: '',
         protocol: 'ws'
       }
     }
   },
   mounted() {
+    // console.log('server: ', self.location.host)
+    this.connectionDetails.host = self.location.host
     if (typeof this.$route.params.id !== 'undefined') {
       console.log('id set in url, autoconnect')
       this.connectionDetails.sessionId = this.$route.params.id
@@ -72,7 +73,7 @@ export default {
     },
     newSession() {
       console.log('Requesting new session')
-      axios.get(`http://${this.connectionDetails.host}:${this.connectionDetails.port}/new`)
+      axios.get(`http://${this.connectionDetails.host}/new`)
       .then((response) => {
         console.log('Response:', response.data)
 
@@ -99,7 +100,7 @@ export default {
     },
     connect(sessionId) {
       this.connection.status = 'connecting'
-      this.connection.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}:${this.connectionDetails.port}/?id=${sessionId}`)
+      this.connection.socket = new WebSocket(`${this.connectionDetails.protocol}://${this.connectionDetails.host}/?id=${sessionId}`)
       this.connection.socket.onopen = () => {
         console.log("[open] Connection established")
         this.connection.status = 'connected'
