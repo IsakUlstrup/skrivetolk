@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon ./src/main.js",
     "start": "node ./src/main.js",
-    "build-client": "cd ./client && npm i && npm run build"
+    "build-client": "cd ./client && npm i && npm run build",
+    "dev-client": "cd ./client && npm run serve"
   },
   "engines": {
     "node": "12.x"
