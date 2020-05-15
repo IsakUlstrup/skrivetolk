@@ -2,7 +2,11 @@
   "name": "skrivetolk",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "./src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/IsakUlstrup/skrivetolk.git"
+  },
   "scripts": {
     "dev": "nodemon ./src/main.js",
     "start": "node ./src/main.js",
