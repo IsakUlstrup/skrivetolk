@@ -84,13 +84,13 @@ export default {
   border-right: 1px solid #333;
 }
 .input:focus {
-  box-shadow: 0 0 6px rgba(15, 154, 189, 0.8) inset;
+  box-shadow: 0 0 6px var(--user-highlight-color) inset;
 }
 .highlight {
   background: #222;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
   transform: scale(1.04);
-  border: 3px solid rgb(15, 154, 189);
+  border: 3px solid var(--user-highlight-color);
 }
 a {
   color: #555;

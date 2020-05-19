@@ -36,10 +36,29 @@ export default {
   computed: {
     sidePanel() {
       return this.$store.getters.userPreference('showSidePanel') || false
+    },
+    userStyle() {
+      return {
+        backgroundColor: this.$store.getters.userPreference('backgroundColor') || '#ffffff',
+        textColor: this.$store.getters.userPreference('textColor') || '#000000',
+        highlightColor: this.$store.getters.userPreference('highlightColor') || '#ffffff',
+        textSize: this.$store.getters.userPreference('textSize') || '14px'
+      }
+    }
+  },
+  watch: {
+    userStyle: function (newStyle) {
+      document.documentElement.style.setProperty('--user-background-color', newStyle.backgroundColor)
+      document.documentElement.style.setProperty('--user-highlight-color', newStyle.highlightColor)
+      document.documentElement.style.setProperty('--user-text-color', newStyle.textColor)
+      document.documentElement.style.setProperty('--user-text-size', newStyle.textSize)
     }
   },
   beforeMount() {
-    document.documentElement.style.setProperty('--user-background-color', this.$store.getters.userPreference('backgroundColor') || '#ffffff')
+    document.documentElement.style.setProperty('--user-background-color', this.userStyle.backgroundColor)
+    document.documentElement.style.setProperty('--user-highlight-color', this.userStyle.highlightColor)
+    document.documentElement.style.setProperty('--user-text-color', this.userStyle.textColor)
+    document.documentElement.style.setProperty('--user-text-size', this.userStyle.textSize)
   }
 }
 </script>

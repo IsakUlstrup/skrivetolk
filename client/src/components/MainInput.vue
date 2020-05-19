@@ -3,7 +3,6 @@
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
     <textarea
       class="fa"
-      v-bind:style="userStyle"
       placeholder="Skriv her..."
       ref="mainInput"
       v-model="inputData"
@@ -85,12 +84,6 @@ export default {
       }
 
     },
-    userStyle() {
-      return {
-        color: this.$store.getters.userPreference('textColor') || 'black',
-        'font-size': this.$store.getters.userPreference('textSize') || '18px'
-      }
-    },
     acStartsWith() {
       return null
     }
@@ -122,6 +115,8 @@ textarea{
   border: none;
   outline: none;
   background: none;
+  font-size: var(--user-text-size);
+  color: var(--user-text-color);
 }
 #autocompleteResults {
   position: fixed;
