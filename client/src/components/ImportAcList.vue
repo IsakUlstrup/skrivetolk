@@ -3,14 +3,18 @@
     <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
         <h3 class="h3 mv2">Importer liste</h3>
         <div class="dropbox">
-          <input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
+          <input
+            type="file"
+            multiple
+            :disabled="isSaving"
+            @change="filesChange('acList', $event.target.files)"
             accept="application/json" class="input-file">
             <p class="pv1" v-if="isInitial">
               Trekk filer hit<br> eller klikk for å velge fil
             </p>
-            <p v-if="isSaving">
+            <!-- <p v-if="isSaving">
               Uploading {{ fileCount }} files...
-            </p>
+            </p> -->
         </div>
       </form>
   </div>
@@ -29,11 +33,8 @@
     },
     data() {
       return {
-        uploadedFiles: [],
         uploadError: null,
-        currentStatus: null,
-        uploadFieldName: 'acList',
-        uploadData: {}
+        currentStatus: null
       }
     },
     computed: {
@@ -54,8 +55,25 @@
       reset() {
         // reset form to initial state
         this.currentStatus = STATUS_INITIAL
-        this.uploadedFiles = []
         this.uploadError = null
+      },
+      save2(formData) {
+        // upload data to the server
+        this.currentStatus = STATUS_SAVING
+
+        formData.getAll('acList').forEach(list => {
+          const fReader = new FileReader()
+          fReader.onload = () => {
+            try {
+              var listData = JSON.parse(fReader.result)
+            } catch(error) {
+              console.log(`JSON parse error: ${error}\n\tfile: ${list.name}`)
+              return
+            }
+            this.$store.commit('addList', listData)
+          }
+          fReader.readAsText(list)
+        })
       },
       save(formData) {
         // upload data to the server
@@ -83,7 +101,7 @@
           });
 
         // save it
-        this.save(formData)
+        this.save2(formData)
         this.reset()
       }
     },
