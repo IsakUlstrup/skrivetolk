@@ -36,6 +36,12 @@ class Session {
       socket.send(data)
     })
   }
+  pingSockets() {
+    this.broadcast(JSON.stringify({
+      type: 'ping',
+      data: 'ping'
+    }))
+  }
 }
 
 module.exports = Session

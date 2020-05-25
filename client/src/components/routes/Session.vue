@@ -8,9 +8,9 @@
       <input class="p3 br2 mb3 w100" type="text" name="session" placeholder="sessionId" v-model="connectionDetails.sessionId">
       <input class="p3 br2 w100" type="button" value="Connect to session" @click="connect">
     </div>
-    <div class="mv2">
+    <!-- <div class="mv2">
       <input class="p3 br2" type="button" value="Ping" @click="ping">
-    </div>
+    </div> -->
 
     <div class="status">
       <h3 class="mv3 h3">Status</h3>
@@ -114,6 +114,12 @@ export default {
           console.log('write permission true')
           this.connection.writePermission = true
           this.$store.commit('webSocket', this.connection)
+        }
+        if (JSON.parse(event.data).type === 'ping') {
+          this.connection.socket.send(JSON.stringify({
+            type: 'ping',
+            data: 'ping'
+          }))
         }
       }
       this.connection.socket.onclose = (event) => {
