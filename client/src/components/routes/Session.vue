@@ -17,10 +17,13 @@
         <p v-if="$route.params.id">id from url: {{ $route.params.id }}</p>
         <ul class="lsn mv3">
           <li>socket: {{ connection.status }}</li>
-          <li v-if="connection.sessionIds.privateId">
+          <li v-if="connection.status === 'connected'">
+            <input class="br3 p3" type="button" value="disconnect" @click="disconnect">
+          </li>
+          <li v-if="connection.status === 'connected'">
             <router-link :to="connection.sessionIds.privateId | sessionLink">Link for tolk</router-link>
           </li>
-          <li v-if="connection.sessionIds.publicId">
+          <li v-if="connection.status === 'connected'">
             <router-link :to="connection.sessionIds.publicId | sessionLink">Link for bruker</router-link>
           </li>
         </ul>
@@ -63,6 +66,11 @@ export default {
     }
   },
   methods: {
+    disconnect() {
+      if (this.connection.socket) {
+        this.connection.socket.close()
+      }
+    },
     ping() {
       if (this.connection.socket) {
         this.connection.socket.send(JSON.stringify({
