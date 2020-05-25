@@ -17,6 +17,9 @@
         <p v-if="$route.params.id">id from url: {{ $route.params.id }}</p>
         <ul class="lsn mv3">
           <li>socket: {{ connection.status }}</li>
+          <li v-if="connection.status === 'connected' && connection.writePermission">
+            write permission
+          </li>
           <li v-if="connection.status === 'connected'">
             <input class="br3 p3" type="button" value="disconnect" @click="disconnect">
           </li>
@@ -129,6 +132,9 @@ export default {
             data: 'ping'
           }))
         }
+      }
+      this.connection.socket.onerror = (event) => {
+        console.log('websocket error:', event)
       }
       this.connection.socket.onclose = (event) => {
         console.log('Connection closed: ', event.code, event.reason)
