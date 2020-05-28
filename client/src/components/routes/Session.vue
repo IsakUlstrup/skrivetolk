@@ -117,7 +117,7 @@ export default {
         console.log("[open] Connection established")
         this.mergeConnection({status: 'connected'})
 
-        qr.toDataURL(`${(this.connectionDetails.secure) ? 'https' :'http'}://${this.connectionDetails.host}/?id=${this.connectionComp.publicId}`)
+        qr.toDataURL(`${(this.connectionDetails.secure) ? 'https' :'http'}://${this.connectionDetails.host}/#/session/${this.connectionComp.publicId}`)
         .then(url => {
           this.qrCodes.public = url
           console.log(url)
