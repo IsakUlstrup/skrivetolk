@@ -26,6 +26,9 @@
           <li v-if="connectionComp.status === 'connected'">
             <router-link :to="connectionComp.publicId | sessionLink">Link for bruker</router-link>
           </li>
+          <li v-if="connectionComp.status === 'connected'">
+            <img class="w100" :src="qrCodes.public" alt="">
+          </li>
         </ul>
     </div>
 
@@ -34,11 +37,16 @@
 
 <script>
 import axios from 'axios'
+import qr from 'qrcode'
 
 export default {
   name: 'Session',
   data: () => {
     return {
+      qrCodes: {
+        public: null,
+        private: null
+      },
       connectionDetails: {
         host: '',
         secure: false,
@@ -108,6 +116,16 @@ export default {
       socket.onopen = () => {
         console.log("[open] Connection established")
         this.mergeConnection({status: 'connected'})
+
+        qr.toDataURL(`${(this.connectionDetails.secure) ? 'https' :'http'}://${this.connectionDetails.host}/?id=${this.connectionComp.publicId}`)
+        .then(url => {
+          this.qrCodes.public = url
+          console.log(url)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+
       }
       socket.onmessage = (event) => {
         console.log(`[server] ${event.data}`)
