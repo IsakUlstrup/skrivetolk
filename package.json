@@ -12,7 +12,8 @@
     "start": "node ./src/main.js",
     "client-build": "cd ./client && npm i && npm run build",
     "client-dev": "cd ./client && npm run serve",
-    "client-install": "cd ./client && npm i"
+    "client-install": "cd ./client && npm i",
+    "deploy": "flyctl deploy"
   },
   "engines": {
     "node": "12.x"

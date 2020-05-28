@@ -64,6 +64,7 @@ export default {
 </script>
 
 <style>
+@import './assets/normalize.css';
 @import './assets/style.css';
 
 #app {
