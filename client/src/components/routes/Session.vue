@@ -50,7 +50,7 @@ export default {
       },
       connectionDetails: {
         host: '',
-        protocol: 'ws'
+        protocol: 'wss'
       }
     }
   },
