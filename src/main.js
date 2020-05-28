@@ -230,7 +230,7 @@ function sessionCleanup() {
 
 
 //start our server
-server.listen(process.env.PORT || 8888, () => {
+server.listen(process.env.PORT || 8080, () => {
   console.log(`Server started on port ${server.address().port} :)`)
 })
 
