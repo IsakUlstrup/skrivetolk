@@ -84,7 +84,7 @@ export default {
     },
     newSession() {
       console.log('Requesting new session')
-      axios.get(`http://${this.connectionDetails.host}/new`)
+      axios.get(`https://${this.connectionDetails.host}/new`)
       .then((response) => {
         console.log('Response:', response.data)
 
