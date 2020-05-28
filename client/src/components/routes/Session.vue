@@ -1,12 +1,12 @@
 <template>
   <div class="Session">
     <div class="mv2">
-      <input class="p3 br2 w100" type="button" value="New session" @click="newSession">
+      <input class="p3 i br2 b w100" type="button" value="New session" @click="newSession">
     </div>
 
     <div class="mv2">
-      <input class="p3 br2 mb3 w100" type="text" name="session" placeholder="sessionId" v-model="connectionDetails.sessionId">
-      <input class="p3 br2 w100" type="button" value="Connect to session" @click="connect">
+      <input class="p3 i b br2 mb3 w100" type="text" name="session" placeholder="sessionId" v-model="connectionDetails.sessionId">
+      <input class="p3 i b br2 w100" type="button" value="Connect to session" @click="connect">
     </div>
     <!-- <div class="mv2">
       <input class="p3 br2" type="button" value="Ping" @click="ping">

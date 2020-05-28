@@ -201,7 +201,7 @@ body {
 
 /* Border */
 .b {
-  border:1px solid white
+  border:1px solid white;
 }
 .bb {
   border-bottom: 1px solid white;
@@ -237,7 +237,10 @@ body {
 
 
 
-
+.ti:focus {
+  box-shadow: 0 0 6px var(--user-highlight-color) inset;
+  border-color: var(--user-highlight-color);
+}
 
 .invisible {
   display: none;
