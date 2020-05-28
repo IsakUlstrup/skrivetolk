@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     acLists: [],
     userPreferences: [],
-    connection: undefined
+    connection: {}
 
   },
   mutations: {
@@ -123,11 +123,7 @@ export default new Vuex.Store({
   },
   getters: {
     getConnection: state => {
-      if (state.connection !== undefined) {
-        return state.connection
-      } else {
-        return false
-      }
+      return state.connection
     },
     // return user preference by key
     userPreference: (state) => (key) => {

@@ -90,6 +90,7 @@ export default {
   },
   watch: {
     connection: function (newConnection) {
+      console.log(newConnection)
       if (newConnection.status === 'connected') {
         newConnection.socket.addEventListener('message', (event) => {
           var messageObject = JSON.parse(event.data)
