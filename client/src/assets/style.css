@@ -36,9 +36,17 @@ table {
   --header1Font: Diavlo, sans-serif;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
   background-color: var(--user-background-color);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* General padding */
@@ -231,8 +239,10 @@ body {
   border: none;
 }
 
-
-
+/* Scroll */
+.sy {
+  overflow-y: scroll;
+}
 
 
 

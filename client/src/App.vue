@@ -1,7 +1,7 @@
 <template>
   <!-- <div id="app" v-bind:style="userStyle"> -->
   <div id="app">
-    <section class="sidePanel f" v-bind:class="{ hidePanel: !sidePanel }">
+    <section class="sidePanel f sy" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
       <div>
@@ -31,6 +31,12 @@ export default {
         key: 'showSidePanel',
         value: !this.sidePanel
       })
+    },
+    setVH() {
+      var height = window.innerHeight
+      document.documentElement.style.setProperty('--vh', `${height * 0.01}px`)
+      // this.height = height
+      // console.log(height)
     }
   },
   computed: {
@@ -59,6 +65,10 @@ export default {
     document.documentElement.style.setProperty('--user-highlight-color', this.userStyle.highlightColor)
     document.documentElement.style.setProperty('--user-text-color', this.userStyle.textColor)
     document.documentElement.style.setProperty('--user-text-size', this.userStyle.textSize)
+  },
+  mounted() {
+    this.setVH()
+    window.addEventListener('resize', this.setVH)
   }
 }
 </script>
