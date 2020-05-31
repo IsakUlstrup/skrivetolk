@@ -1,6 +1,6 @@
 <template>
   <!-- <div id="app" v-bind:style="userStyle"> -->
-  <div id="app">
+  <div id="app" class="mh">
     <section class="sidePanel f sy" v-bind:class="{ hidePanel: !sidePanel }">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
