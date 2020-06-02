@@ -1,14 +1,14 @@
 <template>
   <!-- <div id="app" v-bind:style="userStyle"> -->
-  <div id="app" class="mh">
-    <section class="sidePanel f sy" v-bind:class="{ hidePanel: !sidePanel }">
+  <div id="app" class="mh f">
+    <section class="sidePanel f sy f2" v-if="sidePanel">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
-      <div>
-        <a class="h1 p3 mh3 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
-      </div>
     </section>
-    <section id="content" class="p1" v-bind:class="{ moveRight: sidePanel }">
+    <div class="pa f0" v-if="!sidePanel">
+      <a class="h1 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
+    </div>
+    <section id="content" class="p1 f1">
       <MainInput />
     </section>
   </div>
@@ -102,23 +102,10 @@ export default {
 }
 .sidePanel {
   /* box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8); */
-  transition: left 0.2s;
-  /* flex: 1 0 400px; */
-  min-width: 300px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 30%;
+  transition: all 0.2s;
+  flex: 1 0 400px;
   background: #333;
   color: white;
-}
-.hidePanel {
-  left: -30%;
-  min-width: 0;
-}
-.moveRight {
-  margin-left: 30%;
 }
 .l {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
