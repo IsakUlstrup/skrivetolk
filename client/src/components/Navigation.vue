@@ -37,8 +37,8 @@ a {
 
 @media only screen and (max-width: 600px) {
   a {
-    padding: 8px 12px;
-    font-size: 16pt;
+    font-size: 18pt;
+    padding: 10px 18px;
   }
 }
 
@@ -47,12 +47,7 @@ a:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5) inset;
 }
 li .router-link-active {
-  /* background: #8A2387; 
-background: -webkit-linear-gradient(to bottom right, #F27121, #E94057, #8A2387); 
-background: linear-gradient(to bottom right, #F27121, #E94057, #8A2387);  */
-
   background: var(--user-highlight-color);
-
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7) inset;
 }
 </style>
