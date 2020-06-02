@@ -1,6 +1,6 @@
 <template>
   <nav id="Navigation">
-    <ul>
+    <ul class="lsn ct">
       <li><a class="l tdn" @click="hideSidePanel">≡</a></li>
       <li><router-link to="/home">⌂</router-link></li>
       <li><router-link to="/manage">✎</router-link></li>
@@ -34,13 +34,17 @@ a {
   border-bottom: 1px solid #222;
   font-size: 22pt;
 }
+
+@media only screen and (max-width: 600px) {
+  a {
+    padding: 8px 12px;
+    font-size: 16pt;
+  }
+}
+
 a:hover {
   background: #444;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5) inset;
-}
-ul {
-  list-style: none;
-  width: 60px;
 }
 li .router-link-active {
   /* background: #8A2387; 
