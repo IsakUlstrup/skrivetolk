@@ -1,6 +1,7 @@
 <template>
   <nav id="Navigation">
     <ul>
+      <li><a class="l tdn" @click="hideSidePanel">≡</a></li>
       <li><router-link to="/home">⌂</router-link></li>
       <li><router-link to="/manage">✎</router-link></li>
       <li><router-link to="/debug">⚙︎</router-link></li>
@@ -11,7 +12,16 @@
 
 <script>
 export default {
-  name: 'Navigation'
+  name: 'Navigation',
+  methods: {
+    hideSidePanel() {
+      this.$store.commit({
+        type: 'setPreference',
+        key: 'showSidePanel',
+        value: false
+      })
+    }
+  }
 }
 </script>
 

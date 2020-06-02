@@ -6,7 +6,7 @@
       <router-view id="router" class="p2 fa bbn btn"></router-view>
     </section>
     <div class="pa f0" v-if="!sidePanel">
-      <a class="h1 l tdn" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
+      <a class="h1 l tdn mh3" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
     <section id="content" class="p1 f1">
       <MainInput />
