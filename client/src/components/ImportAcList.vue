@@ -9,12 +9,6 @@
             :disabled="isSaving"
             @change="filesChange('acList', $event.target.files)"
             accept="application/json" class="input-file">
-            <p class="pv1" v-if="isInitial">
-              Trekk filer hit<br> eller klikk for å velge fil
-            </p>
-            <!-- <p v-if="isSaving">
-              Uploading {{ fileCount }} files...
-            </p> -->
         </div>
       </form>
   </div>
@@ -112,25 +106,25 @@
 </script>
 
 <style scoped>
-.dropbox {
-    outline: 2px solid grey; /* the dash box */
-    min-height: 50px; /* minimum height */
+/* .dropbox {
+    outline: 2px solid grey;
+    min-height: 50px;
     position: relative;
     cursor: pointer;
-  }
+  } */
 
-  .input-file {
+  /* .input-file {
     opacity: 0;
     height: 200px;
     position: absolute;
     cursor: pointer;
-  }
+  } */
 
-  .dropbox:hover {
-    background: rgb(134, 134, 134); /* when mouse over to the drop zone, change color */
-  }
+  /* .dropbox:hover {
+    background: rgb(134, 134, 134);
+  } */
 
-  .dropbox p {
+  /* .dropbox p {
     text-align: center;
-  }
+  } */
 </style>

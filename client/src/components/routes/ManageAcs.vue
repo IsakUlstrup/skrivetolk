@@ -3,7 +3,7 @@
     <AcLists />
     <div id="actions">
       <AddAcList />
-      <!-- <ImportAcList /> -->
+      <ImportAcList />
     </div>
   </div>
 </template>
@@ -11,14 +11,14 @@
 <script>
 import AcLists from '../AcLists'
 import AddAcList from '../AddAcList'
-// import ImportAcList from '../ImportAcList'
+import ImportAcList from '../ImportAcList'
 
 export default {
   name: 'ManageAcs',
   components: {
     AcLists,
     AddAcList,
-    // ImportAcList
+    ImportAcList
   }
 }
 </script>
