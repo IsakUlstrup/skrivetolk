@@ -107,7 +107,7 @@ export default {
 }
 .sidePanel {
   /* flex: 1 0 400px; */
-  min-width: 350px;
+  min-width: 300px;
   background: #333;
   color: white;
 }
