@@ -1,9 +1,9 @@
 <template>
   <!-- <div id="app" v-bind:style="userStyle"> -->
   <div id="app" class="mh f">
-    <section class="sidePanel f sy f1 mh" v-if="sidePanel">
+    <section class="sidePanel f f1 mh" v-if="sidePanel">
       <Navigation />
-      <router-view id="router" class="p2 fa bbn btn"></router-view>
+      <router-view id="router" class="p2 sy fa bbn btn"></router-view>
     </section>
     <div class="pa f0" v-if="!sidePanel">
       <a class="h1 l tdn mh3" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
@@ -84,6 +84,9 @@ export default {
   #app {
     flex-wrap: wrap;
   }
+  #router {
+    padding: var(--spacing3);
+  }
 }
 
 #toggleSidePanel {
@@ -96,7 +99,6 @@ export default {
   opacity: 1;
 }
 #router {
-  overflow-y: scroll;
   border: 1px solid #111;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8) inset;
   background: #222;
@@ -105,7 +107,7 @@ export default {
 }
 .sidePanel {
   /* flex: 1 0 400px; */
-  min-width: 400px;
+  min-width: 350px;
   background: #333;
   color: white;
 }

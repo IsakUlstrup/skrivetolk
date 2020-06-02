@@ -24,7 +24,7 @@
       @blur="deactivate"
     >
     <a
-      class="p3"
+      class="p3 fi"
       @click="add"
       tabindex="-1"
     >+</a>
@@ -94,7 +94,6 @@ export default {
 }
 a {
   color: #555;
-  flex: 1 0 fit-content;
   text-decoration: none;
   border-radius: 0 3px 3px 0;
   cursor: pointer;

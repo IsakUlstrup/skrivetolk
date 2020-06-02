@@ -1,6 +1,6 @@
 <template>
   <li
-    class="f br2 m3 ac"
+    class="f br2 ac m3"
     v-bind:class="{ highlight: active }"
   >
     <input
@@ -25,7 +25,7 @@
       @blur="deactivate"
     >
     <a
-      class="p3"
+      class="p3 fi"
       @click="deleteAc"
       tabindex="-1"
     >✕</a>
@@ -101,7 +101,7 @@ export default {
 }
 a {
   color: #555;
-  flex: 1 0 fit-content;
+  /* flex: 1 0 30px; */
   text-decoration: none;
   border-radius: 0 3px 3px 0;
   cursor: pointer;

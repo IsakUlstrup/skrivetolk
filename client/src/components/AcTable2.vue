@@ -12,7 +12,7 @@
     <addAc v-bind:acList="acList"/>
 
     <transition-group
-      class="list w100 lsn"
+      class="list lsn sy"
       v-if="acList.acs.length > 0"
       name="list"
       tag="ul">
@@ -106,6 +106,5 @@ export default {
 }
 .list {
   max-height: 300px;
-  overflow-y: scroll;
 }
 </style>

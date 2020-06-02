@@ -2,7 +2,7 @@
   <div id="AcList" class="mb1 shadow">
     <h3 class="h3">{{list.name}}</h3>
     <div id="metaData">
-        <ul class="f fw lsn nw">
+        <ul class="f fw lsn">
           <!-- <li>Id: {{list.id}}</li> -->
           <!-- <li><input class="mr3" type="checkbox" name="enableList"></li> -->
           <li class="mr3">{{list.lastUpdate | formatDate}}</li>
