@@ -1,8 +1,8 @@
 <template>
-  <div id="MainInput" class="f p1">
+  <div id="MainInput" class="f">
     <!-- <textarea v-model="inputData" v-on:keyup.prevent="handleInput"></textarea> -->
     <textarea
-      class="fa"
+      class="fa mh"
       placeholder="Skriv her..."
       ref="mainInput"
       v-model="inputData"
@@ -110,10 +110,10 @@ export default {
 <style scoped>
 textarea{
   /* display: block; */
-  /* width: 100%; */
-  height: 75vh;
+  width: 100%;
+  height: 70vh;
   resize: none;
-  border: none;
+  border: 1px solid #262626;
   outline: none;
   background: none;
   font-size: var(--user-text-size);

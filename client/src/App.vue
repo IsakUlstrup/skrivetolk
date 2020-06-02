@@ -1,14 +1,14 @@
 <template>
   <!-- <div id="app" v-bind:style="userStyle"> -->
   <div id="app" class="mh f">
-    <section class="sidePanel f sy f2" v-if="sidePanel">
+    <section class="sidePanel f sy f1 mh" v-if="sidePanel">
       <Navigation />
       <router-view id="router" class="p2 fa bbn btn"></router-view>
     </section>
     <div class="pa f0" v-if="!sidePanel">
       <a class="h1 l tdn mh3" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
-    <section id="content" class="p1 f1">
+    <section id="content" class="p1 f3">
       <MainInput />
     </section>
   </div>
@@ -77,9 +77,15 @@ export default {
 @import './assets/normalize.css';
 @import './assets/style.css';
 
-#app {
-  height: 100vh;
+@media only screen and (max-width: 600px) {
+  .sidePanel {
+    flex: 100%;
+  }
+  #app {
+    flex-wrap: wrap;
+  }
 }
+
 #toggleSidePanel {
   display: block;
   position: absolute;
@@ -97,13 +103,9 @@ export default {
   border-top: none;
   border-bottom: none;
 }
-#content {
-  transition: all 0.2s ease-out;
-}
 .sidePanel {
-  /* box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8); */
-  transition: all 0.2s;
-  flex: 1 0 400px;
+  /* flex: 1 0 400px; */
+  min-width: 400px;
   background: #333;
   color: white;
 }
