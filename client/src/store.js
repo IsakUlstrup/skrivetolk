@@ -144,14 +144,33 @@ export default new Vuex.Store({
       // console.log('store returning: ', matchingKeys[0].value)
       return matchingKeys[0].value
     },
-    color: (state, getters) => (key) => {
-      var color = getters.userPreference(key)
-      if (!color) {
-        console.log(`Key ${key} not found, returning default (#fff)`)
-        return '#fff'
-      }
+    // color: (state, getters) => (key) => {
+    //   var color = getters.userPreference(key)
+    //   if (!color) {
+    //     console.log(`Key ${key} not found, returning default (#fff)`)
+    //     return '#fff'
+    //   }
 
-      return color
+    //   return color
+    // },
+    filteredAcs: state => string => {
+      // console.log('store: getting acs that start with:', string, state)
+      // string = string.toLowerCase()
+      var matches = []
+      state.acLists.forEach(list => {
+        // console.log('match ' + string + ' in list:', list.name)
+        // var acs = list.acs.filter(ac => {
+        //   return ac.in.startsWith(string)
+        // })
+        // console.log(acs)
+        list.acs.filter(ac => {
+          if (ac.in.startsWith(string.toLowerCase())) {
+            matches.push(ac)
+          }
+          // return ac.in.startsWith(string)
+        })
+      })
+      return matches
     },
     acLists: state => {
       return state.acLists

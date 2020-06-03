@@ -9,20 +9,21 @@
       <a class="h1 l tdn mh3" id="toggleSidePanel" @click="toggleSidePanel">≡</a>
     </div>
     <section id="content" class="p1 f3">
-      <MainInput />
+      <MainInput2 />
     </section>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation'
-import MainInput from './components/MainInput'
+// import MainInput from './components/MainInput'
+import MainInput2 from './components/MainInput2'
 
 export default {
   name: 'App',
   components: {
     Navigation,
-    MainInput
+    MainInput2
   },
   methods: {
     toggleSidePanel() {
