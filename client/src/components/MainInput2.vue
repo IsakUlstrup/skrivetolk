@@ -67,7 +67,7 @@ export default {
       }
 
       // if input is empty, remove flag is true and we press backspace, delete last word
-      if (event.key === 'Backspace' && this.textInput === '') {
+      if (event.key === 'Backspace' && event.ctrlKey === true) {
         console.log('remove last word')
         this.textContent.pop()
         return
