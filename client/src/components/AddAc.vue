@@ -11,6 +11,7 @@
       v-model="formData.in"
       @focus="activate"
       @blur="deactivate"
+      v-on:keyup.enter="add"
     >
 
     <input
@@ -22,6 +23,7 @@
       v-model="formData.out"
       @focus="activate"
       @blur="deactivate"
+      v-on:keyup.enter="add"
     >
     <a
       class="p3 fi"
@@ -50,7 +52,7 @@ export default {
     add() {
       // console.log(this.list.id)
       var ac = {
-        in: this.formData.in,
+        in: this.formData.in.toLowerCase(),
         out: this.formData.out,
         listId: this.acList.id
       }
