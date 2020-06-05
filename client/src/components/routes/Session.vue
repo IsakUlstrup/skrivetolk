@@ -4,30 +4,31 @@
       <input class="p3 i br2 b w100" type="button" value="New session" @click="newSession">
     </div>
 
-    <div class="mv2">
+    <!-- <div class="mv2">
       <input class="p3 i b br2 mb3 w100" type="text" name="session" placeholder="sessionId" v-model="connectionDetails.sessionId">
       <input class="p3 i b br2 w100" type="button" value="Connect to session" @click="connect">
-    </div>
+    </div> -->
 
     <div class="status">
       <h3 class="mv3 h3">Status</h3>
         <p v-if="$route.params.id">id from url: {{ $route.params.id }}</p>
         <ul class="lsn mv3">
-          <li v-if="connectionComp.status">socket: {{ connectionComp.status }}</li>
-          <li v-if="connectionComp.status === 'connected' && connectionComp.writePermission">
-            write permission
-          </li>
           <li v-if="connectionComp.status === 'connected'">
             <input class="br3 b p3 mv3 w100" type="button" value="disconnect" @click="disconnect">
           </li>
-          <li v-if="connectionComp.status === 'connected'">
+          <li v-if="connectionComp.status">socket: {{ connectionComp.status }}</li>
+          <li v-if="connectionComp.status === 'connected' && connectionComp.writePermission">
+            admin
+          </li>
+          <li class="mv2" v-if="connectionComp.status === 'connected'">
             <router-link :to="connectionComp.privateId | sessionLink">Link for tolk</router-link>
+            <br>
+            <img class="m1" :src="connectionComp.qr.private">
           </li>
-          <li v-if="connectionComp.status === 'connected'">
+          <li class="mv2" v-if="connectionComp.status === 'connected'">
             <router-link :to="connectionComp.publicId | sessionLink">Link for bruker</router-link>
-          </li>
-          <li v-if="connectionComp.status === 'connected'">
-            <img class="w100" :src="qrCodes.public" alt="">
+            <br>
+            <img class="m1" :src="connectionComp.qr.public">
           </li>
         </ul>
     </div>
@@ -117,14 +118,31 @@ export default {
         console.log("[open] Connection established")
         this.mergeConnection({status: 'connected'})
 
+        var QrCodes = {}
+
         qr.toDataURL(`${(this.connectionDetails.secure) ? 'https' :'http'}://${this.connectionDetails.host}/#/session/${this.connectionComp.publicId}`)
         .then(url => {
-          this.qrCodes.public = url
-          console.log(url)
+          // this.qrCodes.public = url
+          // this.mergeConnection({qr: {public: url}})
+          QrCodes.public = url
+          // console.log(url)
         })
         .catch(err => {
           console.error(err)
         })
+
+        qr.toDataURL(`${(this.connectionDetails.secure) ? 'https' :'http'}://${this.connectionDetails.host}/#/session/${this.connectionComp.privateId}`)
+        .then(url => {
+          // this.qrCodes.private = url
+          // this.mergeConnection({qr: {private: url}})
+          QrCodes.private = url
+          // console.log(url)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+
+        this.mergeConnection({qr: QrCodes})
 
       }
       socket.onmessage = (event) => {
