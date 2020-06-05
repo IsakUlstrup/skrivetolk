@@ -1,6 +1,6 @@
 <template>
   <div id="MainInput">
-    <transition-group name="fade" class="textDisplay sy mv1 pv2" tag="div">
+    <transition-group name="fade" class="textDisplay noselect sy mv1 pv2" tag="p">
       <span
         v-for="text in textContent" :key="text.id"
       >{{text.word}} <br v-if="text.newLine"></span>
@@ -15,6 +15,7 @@
         name="Main input"
         v-on:keyup="handleInput"
         v-model="textInput"
+        v-if="!connection || connection.writePermission === true"
       >
       <ul id="autocompleteResults" v-if="textInput != ''">
         <li v-for="ac in acResults.slice(0, 10)" :key="ac.id">
@@ -43,13 +44,28 @@ export default {
     }
   },
   methods: {
+    sendWord(data) {
+      if (this.connection && this.connection.status === 'connected' && this.connection.writePermission) {
+        var wordObject = {
+          word: data.word,
+          newLine: data.newLine,
+          id: data.id || uuidv4(),
+          timestamp: data.timestamp || moment().format(),
+        }
+        this.connection.socket.send(JSON.stringify({
+          type: 'newWord',
+          data: wordObject
+        }))
+      }
+    },
     addWord(data) {
       // push our new word, this will send over websocket in the future
+      
       var wordObject = {
-          word: data.word + ' ',
-          newLine: (data.delimiter === 'newLine') ? true : false,
-          id: uuidv4(),
-          timestamp: moment().format(),
+          word: data.word,
+          newLine: data.newLine,
+          id: data.id || uuidv4(),
+          timestamp: data.timestamp || moment().format(),
       }
       wordObject.timeout = setTimeout(() => {
         // console.log('word is old', wordObject.word)
@@ -57,7 +73,19 @@ export default {
           return text.id !== wordObject.id
         })
       }, wordTimeout * 1000)
+
+      
       this.textContent.push(wordObject)
+    },
+    removeLastWord() {
+      console.log('remove last word')
+      this.textContent.pop()
+      if (this.connection && this.connection.status === 'connected' && this.connection.writePermission) {
+        this.connection.socket.send(JSON.stringify({
+          type: 'removeLastWord',
+          data: ''
+        }))
+      }
     },
     handleInput(event) {
       // console.log(event)
@@ -68,8 +96,7 @@ export default {
 
       // if input is empty, remove flag is true and we press backspace, delete last word
       if (event.key === 'Backspace' && event.ctrlKey === true) {
-        console.log('remove last word')
-        this.textContent.pop()
+        this.removeLastWord()
         return
       }
 
@@ -79,10 +106,10 @@ export default {
       }
 
       // set text delimiter, this should include new line in the future
-      var delimiter = (event.key === ' ') ? ' ' : (event.key === 'Enter') ? 'newLine' : null;
+      var newLine = (event.key === 'Enter') ? true : false;
 
       // remove trailing space from input, if delimiter is not newline
-      if ( delimiter !== 'newLine') {
+      if ( !newLine) {
         this.textInput = this.textInput.slice(0, -1)
       }
 
@@ -93,10 +120,11 @@ export default {
         this.uppercaseFlag = false
       }
 
-      console.log(`New text: [${this.textInput}] delimiter: [${delimiter}] uppercaseFlag: ${this.uppercaseFlag}`)
+      console.log(`New text: [${this.textInput}] newLine: [${newLine}] uppercaseFlag: ${this.uppercaseFlag}`)
 
       // push our new word, this will send over websocket in the future
-      this.addWord({word: this.textInput, delimiter})
+      this.addWord({word: this.textInput, newLine })
+      this.sendWord({word: this.textInput, newLine })
       this.textInput = ''
     }
   },
@@ -116,20 +144,20 @@ export default {
     }
   },
   watch: {
+    // when connection changes, attach new event listeners
+    // maybe remove old ones also?
     connection: function (newConnection) {
-      return newConnection
-      // console.log(newConnection)
-      // if (newConnection.status === 'connected') {
-      //   newConnection.socket.addEventListener('message', (event) => {
-      //     var messageObject = JSON.parse(event.data)
-      //     if (messageObject.type === 'content' && messageObject.data) {
-      //       console.log('new data recieved, replacing input value:', messageObject.data)
-      //       this.inputData = messageObject.data
-      //       this.scrollBottom()
-      //     }
-      //   })
-      //   console.log('New connection')
-      // }
+      if (newConnection.status === 'connected') {
+        newConnection.socket.addEventListener('message', (event) => {
+          var messageObject = JSON.parse(event.data)
+          if (messageObject.type === 'newWord' && messageObject.data) {
+            this.addWord(messageObject.data)
+          }
+          if (messageObject.type === 'removeLastWord') {
+            this.removeLastWord()
+          }
+        })
+      }
     }
   },
 }
@@ -149,10 +177,11 @@ export default {
   height: 50vh;
   color: var(--user-text-color);
   font-size: var(--user-text-size);
+  text-align: right;
 }
-.textDisplay span {
-  padding-top: auto;
-}
+/* .textDisplay span {
+  align-self: flex-end;
+} */
 .temp {
   color: var(--user-highlight-color);
 }

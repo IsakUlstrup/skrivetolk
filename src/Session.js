@@ -6,7 +6,7 @@ class Session {
     this.content = ''
   }
   // broadcast data to all sockets
-  broadcast(data) {
+  broadcast(data, source) {
     // if noone is connected, return
     if (this.sockets.length < 1) {
       return
@@ -14,6 +14,9 @@ class Session {
 
     // broadcast
     this.sockets.forEach(socket => {
+      if (source === socket) {
+        return
+      }
       socket.send(data)
     })
   }

@@ -18,7 +18,7 @@ app.use(express.static('static'))
 // session object
 var sessions = []
 // valid message types
-var messageTypes = ['ping', 'content', 'status', 'connection']
+var messageTypes = ['ping', 'newWord', 'removeLastWord', 'status', 'connection']
 // socket timeout, in seconds
 var timeoutLength = 10
 
@@ -140,13 +140,24 @@ wss.on('connection', (ws, req) => {
           // console.log('ping from client:', ws.lastActive)
           break
       
-        case 'content':
+        case 'newWord':
           if (ws.writePermission) {
-            sessionData.session.content = message.data
+            // sessionData.session.content = message.data
             sessionData.session.broadcast(JSON.stringify({
-              type: 'content',
-              data: sessionData.session.content
-            }))
+              type: 'newWord',
+              data: message.data
+            }), ws)
+          }
+          break
+        
+        case 'removeLastWord':
+          console.log('remove last word')
+          if (ws.writePermission) {
+            // sessionData.session.content = message.data
+            sessionData.session.broadcast(JSON.stringify({
+              type: 'removeLastWord',
+              data: ''
+            }), ws)
           }
           break
 

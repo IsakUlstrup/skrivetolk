@@ -272,7 +272,13 @@ body {
 
 
 
-
+.noselect {
+  user-select: none; /* supported by Chrome and Opera */
+ -webkit-user-select: none; /* Safari */
+ -khtml-user-select: none; /* Konqueror HTML */
+ -moz-user-select: none; /* Firefox */
+ -ms-user-select: none; /* Internet Explorer/Edge */
+}
 .ti:focus {
   box-shadow: 0 0 6px var(--user-highlight-color) inset;
   border-color: var(--user-highlight-color);
