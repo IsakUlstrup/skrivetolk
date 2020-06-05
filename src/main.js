@@ -23,7 +23,6 @@ var messageTypes = ['ping', 'newWord', 'removeLastWord', 'status', 'connection']
 var timeoutLength = 10
 
 
-
 function validateRequest (request, socket) {
   var sessionId = query.parse(url.parse(request.url).query).id
   

@@ -17,6 +17,7 @@ class Session {
       if (source === socket) {
         return
       }
+      // console.log(data)
       socket.send(data)
     })
   }

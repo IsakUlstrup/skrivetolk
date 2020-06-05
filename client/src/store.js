@@ -9,7 +9,15 @@ export default new Vuex.Store({
   state: {
     acLists: [],
     userPreferences: [],
-    connection: {}
+    connection: {
+      socket: undefined,
+      status: 'initial',
+      admin: false,
+      ids: {
+        private: undefined,
+        public: undefined
+      }
+    }
 
   },
   mutations: {
@@ -20,6 +28,46 @@ export default new Vuex.Store({
 					Object.assign(state, JSON.parse(localStorage.getItem('store')))
 				)
 			}
+    },
+    setSocketIds(state, ids) {
+      state.connection.ids = ids
+    },
+    socketDisconnect(state) {
+      state.connection.socket.close()
+    },
+    socketStatus(state, status) {
+      state.connection.status = status
+    },
+    socketConnect(state, connectionDetails) {
+      console.log('connecting:', connectionDetails)
+      var socket = new WebSocket(`${(connectionDetails.secure) ? 'wss' :'ws'}://${connectionDetails.host}/?id=${connectionDetails.sessionId}`)
+      socket.onopen = () => {
+        console.log("store: [open] Connection established")
+        // this.mergeConnection({status: 'connected'})
+        state.connection.socket = socket
+        state.connection.status = 'connected'
+      }
+      socket.onmessage = (event) => {
+        if (JSON.parse(event.data).data.writePermission) {
+          // set write permission flag in stored socket object
+          console.log('admin true')
+          state.connection.admin = true
+        }
+        if (JSON.parse(event.data).type === 'ping') {
+          socket.send(JSON.stringify({
+            type: 'ping',
+            data: 'ping'
+          }))
+        }
+      }
+      socket.onerror = (event) => {
+        console.log('websocket error:', event)
+        state.connection.status = 'websocket error'
+      }
+      socket.onclose = (event) => {
+        console.log('Connection closed: ', event.code, event.reason)
+        state.connection.status = 'closed'
+      }
     },
     webSocket (state, data) {
       state.connection = data

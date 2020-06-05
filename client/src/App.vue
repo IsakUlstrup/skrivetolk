@@ -70,6 +70,22 @@ export default {
   mounted() {
     this.setVH()
     window.addEventListener('resize', this.setVH)
+
+    // autoconnect to session if id is set i url
+    var connectionDetails = {}
+    // protocol
+    if (location.protocol === 'https:') {
+      connectionDetails.secure = true
+    }
+    // host
+    connectionDetails.host = self.location.host
+
+    // parameters
+    if (typeof this.$route.params.id !== 'undefined') {
+      console.log('id set in url, autoconnect')
+      connectionDetails.sessionId = this.$route.params.id
+      this.$store.commit('socketConnect', connectionDetails)
+    }
   }
 }
 </script>

@@ -15,7 +15,7 @@
         name="Main input"
         v-on:keyup="handleInput"
         v-model="textInput"
-        v-if="!connection || connection.writePermission === true"
+        v-if="!connection || connection.admin === true"
       >
       <ul id="autocompleteResults" v-if="textInput != ''">
         <li v-for="ac in acResults.slice(0, 10)" :key="ac.id">
@@ -45,13 +45,17 @@ export default {
   },
   methods: {
     sendWord(data) {
-      if (this.connection && this.connection.status === 'connected' && this.connection.writePermission) {
+      if (this.connection && this.connection.status === 'connected' && this.connection.admin) {
         var wordObject = {
           word: data.word,
           newLine: data.newLine,
           id: data.id || uuidv4(),
           timestamp: data.timestamp || moment().format(),
         }
+        // console.log('sending: ', JSON.stringify({
+        //   type: 'newWord',
+        //   data: wordObject
+        // }))
         this.connection.socket.send(JSON.stringify({
           type: 'newWord',
           data: wordObject
@@ -80,7 +84,7 @@ export default {
     removeLastWord() {
       console.log('remove last word')
       this.textContent.pop()
-      if (this.connection && this.connection.status === 'connected' && this.connection.writePermission) {
+      if (this.connection && this.connection.status === 'connected' && this.connection.admin) {
         this.connection.socket.send(JSON.stringify({
           type: 'removeLastWord',
           data: ''
