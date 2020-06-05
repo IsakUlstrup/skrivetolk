@@ -171,17 +171,11 @@ export default {
   opacity: 0;
 }
 
-
-
 .textDisplay {
   height: 50vh;
   color: var(--user-text-color);
   font-size: var(--user-text-size);
-  text-align: right;
 }
-/* .textDisplay span {
-  align-self: flex-end;
-} */
 .temp {
   color: var(--user-highlight-color);
 }
