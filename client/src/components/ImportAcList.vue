@@ -1,17 +1,18 @@
 <template>
-  <div id="ImportAcList" class="mv2">
-    <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-        <h3 class="h3 mv2">Importer liste</h3>
-        <div class="dropbox">
-          <input
-            type="file"
-            multiple
-            :disabled="isSaving"
-            @change="filesChange('acList', $event.target.files)"
-            accept="application/json" class="input-file">
-        </div>
-      </form>
-  </div>
+  <form class="ImportAcList" enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
+    <input
+      type="button"
+      class="p3 i br3"
+      value="↑"
+    >
+    <input
+      type="file"
+      multiple
+      :disabled="isSaving"
+      @change="filesChange('acList', $event.target.files)"
+      accept="application/json" class="input-file"
+    >
+  </form>
 </template>
 
 <script>
@@ -106,6 +107,18 @@
 </script>
 
 <style scoped>
+.ImportAcList {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+input[type=file] {
+  font-size: 999px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
 /* .dropbox {
     outline: 2px solid grey;
     min-height: 50px;

@@ -91,7 +91,7 @@ export default new Vuex.Store({
         console.log('list exists, replace.', listMatch)
       } else {
         console.log('Adding list: ', list.id)
-        this.state.acLists.push(list)
+        this.state.acLists.unshift(list)
       }
       this.commit('saveState')
     },
@@ -108,7 +108,7 @@ export default new Vuex.Store({
           in: data.in,
           out: data.out
         }
-        listMatch[0].acs.push(ac)
+        listMatch[0].acs.unshift(ac)
         listMatch[0].lastUpdate = moment().format()
       }
       this.commit('saveState')

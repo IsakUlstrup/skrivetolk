@@ -7,20 +7,12 @@
           <!-- <li><input class="mr3" type="checkbox" name="enableList"></li> -->
           <li class="mr3">{{list.lastUpdate | formatDate}}</li>
           <li class="mr3">{{list.acs.length}} ak</li>
-          <!-- <li class="mr3"><a class="l" @click="showTable = !showTable">vis/skjul ak-er</a></li> -->
-          <li>
-            <strong><a class="l tdn" @click="actionMenu = !actionMenu">⋯</a></strong>
-            <aside v-if="actionMenu">
-              <ul class="lsn b">
-                <li><a class="l p3 bb" @click="exportList(list)">Eksporter</a></li>
-                <li><a class="l p3" @click="removeList(list)">Slett</a></li>
-              </ul>
-            </aside>
-          </li>
+          <li><a class="l mr3" @click="exportList(list)">Eksporter</a></li>
+          <li><a class="l" @click="removeList(list)">Slett</a></li>
         </ul>
       </div>
-      <div v-if="showTable" id="acs" class="mt2">
-          <AcTable2 v-bind:acList="list" v-bind:limit="30" />
+      <div id="acs" class="mt2">
+        <AcTable2 v-bind:filter="filter" v-bind:acList="list" v-bind:limit="30" />
       </div>
   </div>
 </template>
@@ -44,13 +36,8 @@ export default {
     // GradientBorderPanel
   },
   props: {
-    list: Object
-  },
-  data: () => {
-    return {
-      showTable: true,
-      actionMenu: false
-    }
+    list: Object,
+    filter: String
   },
   methods: {
     exportList (list) {
