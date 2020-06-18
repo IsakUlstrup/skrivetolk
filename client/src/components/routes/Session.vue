@@ -22,12 +22,12 @@
           </li>
           <li class="mv2" v-if="connection.status === 'connected'">
             <router-link :to="connection.ids.private | sessionLink">Link for tolk</router-link>
-            <br>
-            <img class="m1" :src="privateQR">
+            <!-- <br> -->
+            <!-- <img class="m1" :src="privateQR"> -->
           </li>
           <li class="mv2" v-if="connection.status === 'connected'">
             <router-link :to="connection.ids.public | sessionLink">Link for bruker</router-link>
-            <br>
+            <!-- <br> -->
             <!-- <img class="m1" :src="connection.qr.public"> -->
           </li>
         </ul>
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     disconnect() {
-      return
+      this.$store.commit('socketDisconnect')
     },
     newSession() {
       console.log('Requesting new session')

@@ -1,13 +1,20 @@
 <template>
   <div id="MainInput">
-    <transition-group name="fade" class="textDisplay noselect sy mv1 pv2" tag="p">
+    <div
+      class="p2"
+      contenteditable="true"
+      v-on:keyup="handleInput2"
+      ref="mainInput"
+    >
+      hei
+    </div>
+    {{textData}}
+    <!-- <transition-group name="fade" class="textDisplay noselect sy mv1 pv2" tag="p">
       <span
-        v-for="text in textContent"
-        :key="text.id"
-        v-bind:class="{ expired: text.expired }"
+        v-for="text in textContent" :key="text.id"
       >{{text.word}} <br v-if="text.newLine"></span>
       <span :key="'currentWord'" class="temp">{{textInput}}</span>
-      <span :key="'cursor'">|</span>
+      <span :key="'cursor'">_</span>
     </transition-group>
 
     <div>
@@ -24,7 +31,7 @@
           {{ac.out}}
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -36,16 +43,25 @@ import moment from 'moment'
 const wordTimeout = 15
 
 export default {
-  name: 'MainInput2',
+  name: 'MainInput3',
   data () {
     return {
       textContent: [],
       currentWord: '',
       textInput: '',
-      uppercaseFlag: true
+      uppercaseFlag: true,
+      textData: []
     }
   },
   methods: {
+    handleInput2() {
+      // console.log(event)
+      var cleanInput = this.$refs.mainInput.innerHTML.replace('&nbsp;', '')
+      var wordArray = cleanInput.split(" ")
+
+      this.textData = wordArray
+      this.$refs.mainInput.innerHTML = wordArray.join('sdlkføsdf')
+    },
     sendWord(data) {
       if (this.connection && this.connection.status === 'connected' && this.connection.admin) {
         var wordObject = {
@@ -54,10 +70,6 @@ export default {
           id: data.id || uuidv4(),
           timestamp: data.timestamp || moment().format(),
         }
-        // console.log('sending: ', JSON.stringify({
-        //   type: 'newWord',
-        //   data: wordObject
-        // }))
         this.connection.socket.send(JSON.stringify({
           type: 'newWord',
           data: wordObject
@@ -72,21 +84,17 @@ export default {
           newLine: data.newLine,
           id: data.id || uuidv4(),
           timestamp: data.timestamp || moment().format(),
-          expired: false
       }
-      if (this.connection) {
-        setTimeout(() => {
-          // console.log('word is old', wordObject.word)
+      wordObject.timeout = setTimeout(() => {
+        // console.log('word is old', wordObject.word)
+        if (this.admin) {
           wordObject.expired = true
-          // if (this.admin) {
-          //   wordObject.expired = true
-          // } else {
-          //   this.textContent = this.textContent.filter(text => {
-          //     return text.id !== wordObject.id
-          //   })
-          // }
-        }, wordTimeout * 1000)
-      }
+        } else {
+          this.textContent = this.textContent.filter(text => {
+            return text.id !== wordObject.id
+          })
+        }
+      }, wordTimeout * 1000)
 
       
       this.textContent.push(wordObject)
@@ -144,7 +152,9 @@ export default {
   },
   computed: {
     admin() {
-      return this.connection.admin || false
+      if (this.connection) {
+        return this.connection.admin || false
+      }
     },
     acResults() {
       return this.$store.getters.filteredAcs(this.textInput) || []
@@ -195,9 +205,6 @@ export default {
 }
 .temp {
   color: var(--user-highlight-color);
-}
-.expired {
-  opacity: 0.6;
 }
 #autocompleteResults {
   position: absolute;
