@@ -1,5 +1,7 @@
 # Skrivetolk
 
+[Live demo](https://skrivetolk.fly.dev/)
+
 Requirements:
 - [node + npm](https://nodejs.org/en/)
 
